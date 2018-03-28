@@ -1,10 +1,29 @@
 # interview
 
 #HTML
-  1. 你是如何理解HTML语义的？
-  2. meta viewport 是做什么用的，怎么写？
-  3. canvas 元素是干什么的？
-  4. html5新特性？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
+  1. 你是如何理解HTML语义的？  
+    答：使用合适的标签标示内容。优点在于标签语义化有利于搜索引擎建立索引进行抓取，有助于构建良好的HTML结构便于团队开发和维护。
+  2. meta viewport 是做什么用的，怎么写？  
+    答：meta表示不能被HTML的其它元素（link，script,base, style, title）之一表示的任何元素信息。viewpoint让web开发者控制视口的尺寸及比例,移动设备的viewpoint指设备屏幕上用来展示网页的那一块区域，也就是浏览器上用来展示网页的那部分，可能比浏览器的可视区大，也可能比浏览器可视区域小，一般情况，比浏览器可视区域大。使用方式是<meta name="viewpoint" content="width=device-width, initial-scale=1, maximum-scale=1">
+  3. canvas 元素是干什么的？  
+    答： canvas是用来绘制图形的HTML元素。
+  4. html5新特性？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？  
+    答：[html5新特性](http://www.ganecheng.tech/blog/52819118.html)：
+      - 语义特性: header footer
+      - 本地存储特性： localStorage, manifest
+      - 设备访问特性: Geolocation
+      - 连接特性: webSocket
+      - 网页多媒体特性: audio、video标签
+      - 三维、图形及特效：SVG，Canvas, css3D
+      - 性能、集成特性  
+      ***
+      解决兼容性的方法：  
+      - 在IE8以下，通过document.createElement(新标签)，并设置css样式。document.createElement('header'), header {display: block};
+      - 条件注释的方式
+        <!--[if lt IE 9]>  
+        <script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>  
+        <![endif]-->
+
   5. 说下行内元素和块级元素的区别？行内块元素的兼容性使用？
   6. Doctype作用？标准模式与兼容模式各有什么区别?
 
