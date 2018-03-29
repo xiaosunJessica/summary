@@ -61,12 +61,28 @@
 
 ## CSS
   1. 说说盒模型？ box-sizing常用的属性有哪些？分别有什么作用？ 
-    答：css盒模型是css规范的一个模块，每个元素由一个方形的盒子表示，
+    答：css盒模型是css规范的一个模块，每个元素由一个方形的盒子表示。
     该盒子包含有内容区域（content）、内边框区域(padding)、边框区域(border)、外边框区域(margin)  
       内容区域：元素真实内容，包含背景、颜色或图片，大小为content-box  
       内边距区域padding: 如果内容区域设置了背景、颜色或图片，这些样式为延伸到padding上  
-      边框区域： border  
-      外边距： margin  
+      ```html
+      <div class="parent">
+        <div class="child"></div>
+      </div>
+      .parent {
+        width: 200px;
+        height: 100px;
+        background: #faa;
+      }
+      .child {
+        width: 100%;
+        height: 100%;
+        border: 10px solid yellowgreen;
+        padding: 10px;
+        margin: 10px;
+      }
+      ```
+      box-sizing: content-box
   2. 如何居中  
      **水平居中**
      - 容器上定义一个width,然后设置margin: auto  
