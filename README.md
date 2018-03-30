@@ -55,12 +55,12 @@
     具体区别：
        类别 | 标准模式 | 兼容模式
       ---- | ---- | ----
-      盒模型 | width=元素真正宽度 | width=width + padding + border
-      百分比/行内高度 | 给span设置宽高不生效；父元素没有高度，子元素的百分比高度无效 | 有效
+      盒模型 | width=元素内容宽度(content-box) | width=width + padding + border(box-sizing)
+      百分比/行内高度 | 给span设置宽高不生效；块级元素的父元素没有高度，子元素的百分比高度无效 | 有效
       margin: auto | 水平居中有效 | 无效，可用text-align解决
 
 ## CSS
-  1. 说说盒模型？ box-sizing常用的属性有哪些？分别有什么作用？ 
+  1. 说说盒模型？ box-sizing常用的属性有哪些？分别有什么作用？   
     答：css盒模型是css规范的一个模块，每个元素由一个方形的盒子表示。
     该盒子包含有内容区域（content）、内边框区域(padding)、边框区域(border)、外边框区域(margin)  
       内容区域：元素真实内容，包含背景、颜色或图片，大小为content-box  
@@ -82,7 +82,12 @@
         margin: 10px;
       }
       ```
-      box-sizing: content-box
+      box-sizing的常用属性：  
+      - content-box是默认属性，width和height只是内容的宽和高，并不包括padding、border、margin。上面展示的child实际渲染的宽高为260 * 160   
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/content-box.png" alt="GitHub" title="content-box" width="200" height="200" />
+      - border-box, width和height包含了padding和border,但不不含margin。上面展示的child实际渲染的宽高为220 * 120,多了margin的宽高  
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/border-box.png" alt="GitHub" title="border-box" width="200" height="200" />
+      
   2. 如何居中  
      **水平居中**
      - 容器上定义一个width,然后设置margin: auto  
@@ -130,7 +135,7 @@
       </div>
       #parent {
         overflow: hidden/auto; // 这种方式是触发父元素的BFC
-        zoom: 1; // 该属性不熟悉，主要针对IE低版本设置的
+        zoom: 1; // 主要针对IE低版本设置的
       }
       #parent {
         display: inline-block;
@@ -153,10 +158,46 @@
         clear: both;
       }
       ```
-  6. 页面导入样式时，使用link和@import有什么区别？
-  7. CSS3新增伪类有那些？
-  8. CSS3有哪些新特性？
-  9. 说下行内元素和块级元素的区别？行内块元素的兼容性使用？
+  6. 页面导入样式时，使用link和@import有什么区别？  
+    答：
+    - 加载内容： link是xhtml标签，除了能加载css外，还能加载rss(简单信息聚合——xml文件)；@import只能加载css文件
+    - 加载顺序: link在页面载入的同时加载；@import的css是在页面加载完毕后被加载。
+    - 兼容性问题： link无兼容性问题; @import是css2.1里提出的，低版本不兼容
+    - dom控制问题: link样式，在js中操作dom可修改样式；@import不支持修改
+  7. CSS3哪些新特性? 新增伪类有那些？  
+    答：css3新特性：圆角（border-radius）、阴影（box-shadow\text-shadow）、渐变（gradients）、过度与动画（transition and animations）,新的布局方式：多列布局（column）、flex、grid。  
+    新增伪类：  
+      新增伪类 | 作用 
+      ----- | -------
+      p:first-of-type | 选择该父节点下的首个p元素
+      p:last-of-type | 选择该父节点下的最后p元素
+      p:only-of-type | 选择该父节点下，含有一个p元素的p节点，p可以有兄弟节点
+      p:only-child | 选择该父节点下，含有唯一一个元素且为p,不含有兄弟节点
+      p:nth-child | 选择该父节点下的第n个p节点
+      p:nth-last-child | 选择该父节点下的倒数第n个p节点
+      p:last-child | 选择该父节点下的最后一个p节点
+      p: empty | 选择没有子节点的p
+      :not(p) | 选择非p的每个元素
+
+  8. 说下行内元素和块级元素的区别？行内块元素的兼容性使用？  
+    答： 
+    - 布局上： 行内元素在一行展示，水平排列；块级元素占据一行，垂直排列
+    - 结构上： 行内元素不可以插入块级元素，块级元素可以插入行内元素
+    - 属性上： 行内元素设置width、height无效，margin和padding上下无效。
+    比较常用的行内元素： a、b、em、i、img、input、label、span、strong、sub、sup、textarea
+    行内块元素的兼容性使用： 
+      ```css
+        div {
+          *display: inline;
+          *zoom: 1; // 触发haslayout
+          // display: inline-block; 添加后兼容所有浏览器
+        } 
+      ```
+  9. zoom的作用
+    - 检查页面是否闭合
+    - 样式排除法
+    - 检查是否清除浮动
+    - IE是否触发haslayout
 
 ## JS
   1. JS 有哪些数据类型？
