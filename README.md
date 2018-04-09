@@ -160,10 +160,10 @@
       ```
   6. 页面导入样式时，使用link和@import有什么区别？  
     答：
-    - 加载内容： link是xhtml标签，除了能加载css外，还能加载rss(简单信息聚合——xml文件)；@import只能加载css文件
-    - 加载顺序: link在页面载入的同时加载；@import的css是在页面加载完毕后被加载。
-    - 兼容性问题： link无兼容性问题; @import是css2.1里提出的，低版本不兼容
-    - dom控制问题: link样式，在js中操作dom可修改样式；@import不支持修改
+  - 加载内容： link是xhtml标签，除了能加载css外，还能加载rss(简单信息聚合——xml文件)；@import只能加载css文件
+  - 加载顺序: link在页面载入的同时加载；@import的css是在页面加载完毕后被加载。
+  - 兼容性问题： link无兼容性问题; @import是css2.1里提出的，低版本不兼容
+  - dom控制问题: link样式，在js中操作dom可修改样式；@import不支持修改
   7. CSS3哪些新特性? 新增伪类有那些？  
     答：css3新特性：圆角（border-radius）、阴影（box-shadow\text-shadow）、渐变（gradients）、过度与动画（transition and animations）,新的布局方式：多列布局（column）、flex、grid。  
     新增伪类：  
@@ -181,39 +181,172 @@
 
   8. 说下行内元素和块级元素的区别？行内块元素的兼容性使用？  
     答： 
-    - 布局上： 行内元素在一行展示，水平排列；块级元素占据一行，垂直排列
-    - 结构上： 行内元素不可以插入块级元素，块级元素可以插入行内元素
-    - 属性上： 行内元素设置width、height无效，margin和padding上下无效。
-    比较常用的行内元素： a、b、em、i、img、input、label、span、strong、sub、sup、textarea
-    行内块元素的兼容性使用： 
-      ```css
-        div {
-          *display: inline;
-          *zoom: 1; // 触发haslayout
-          // display: inline-block; 添加后兼容所有浏览器
-        } 
-      ```
+  - 布局上： 行内元素在一行展示，水平排列；块级元素占据一行，垂直排列
+  - 结构上： 行内元素不可以插入块级元素，块级元素可以插入行内元素
+  - 属性上： 行内元素设置width、height无效，margin和padding上下无效。
+  比较常用的行内元素： a、b、em、i、img、input、label、span、strong、sub、sup、textarea
+  行内块元素的兼容性使用：  
+  ```html
+    div {
+      *display: inline;
+      *zoom: 1; // 触发haslayout
+      // display: inline-block; 添加后兼容所有浏览器
+    } 
+  ```
   9. zoom的作用
-    - 检查页面是否闭合
-    - 样式排除法
-    - 检查是否清除浮动
-    - IE是否触发haslayout
+  - 检查页面是否闭合
+  - 样式排除法
+  - 检查是否清除浮动
+  - IE是否触发haslayout
 
 ## JS
-  1. JS 有哪些数据类型？
-  2. Promise 怎么使用?
+  1. JS 有哪些数据类型？  
+    答： js基本数据类型：String、Number、Boolean、Null、undefined。混合数据类型Object(Array)
+  2. [Promise 怎么使用?](https://github.com/xieranmaya/blog/issues/3)
+      ````javascript
+      //声明一个对象
+      var promise = new Promise(function(resolve, reject) {
+        console.info()
+      })
+
+      promise.then();
+
+      ````
   3. AJAX 手写一下(基本步骤)?
-  4. 闭包是什么?
+      ````javascript
+      // 实例化对象
+      var xhr = new XMLHTTPRequest();
+
+      //指定相应函数
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState ==4) {
+          if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+              // success
+          } else {
+              // error
+          }
+        }
+      }
+
+      //指定请求
+      xhr.open(method, url, async);
+
+      // 发送请求
+      xhr.send()
+      ````
+
+  4. 闭包是什么?函数表达式与函数声明的区别？  
+    答： 闭包是在函数外依然能访问函数里的内容。函数声明包括函数名和函数体function func() {},函数表达式是将函数定义为表达式语句的一部分 var func = function() {}
   5. 什么是立即执行函数？使用立即执行函数的目的是什么？
-  6. async/await 语法了解吗？目的是什么？
-  7. 如何实现深拷贝？
-  8. 如何实现数组去重？
+    答：立即执行函数就是声明一个匿名函数，并马上调用它。使用立即执行函数的目的是创建一个独立的作用域
+  6. async/await 语法了解吗？
+    答：async返回的是promise对象，一旦遇到await就会先返回，等到异步操作完成再接着执行函数体内后面的语句。async函数内部的异步操作执行完，才会执行then方法指定的回调函数。await命令后面是一个promise对象，如果不是，会被立即转换成resolve的promise对象。await后面的promise变成reject后，async函数会中断，没有执行的函数也不会继续执行，为解决该问题可以采用try...catch方式
+  7. 如何实现浅拷贝和深拷贝？  
+    答：浅拷贝是拷贝原对象的引用；浅拷贝只是将对象的各个属性一次进行拷贝，不会进行递归拷贝
+      ````javascript
+        function shallowCopy(source) {
+          var targetObj = source.constructor === Array ? [] : {}
+          for(var key in source) {
+            targetObj[key] = source[key]
+          }
+          return targetObj
+        }
+      ````
+      深拷贝是拷贝出一个新的实例，新实例和之前的实例互不影响。深拷贝不仅将各个对象的属性拷贝出来，而且会递归拷贝各个属性所包含的对象。  
+      ````javascript
+        function deepCopy(source) {
+          var targetObj = source.constructor === Array ? [] : {}
+          for (var key in source) {
+            if (source[key] && typeof source[key] === 'object') {
+              targetObj[key] = source[key].constructor === Array ? [] : {}
+              targetObj[key] = deepCopy(source[key])
+            } else {
+              targetObj[key] = source[key]
+            }
+          }
+          return targetObj
+        }
+
+        //利用JSON序列化实现的深拷贝
+        function deepCopy(source) {
+          return JSON.parse(JSON.stringify(source))
+        }
+      ````
+  8. [如何实现数组去重？](https://github.com/mqyqingfeng/Blog/issues/27)  
+    答：
+     - 第一种原始方法：对原数组进行遍历，并在新数组中遍历是否含有，含有就不添加不含有就添加
+     ````javascript
+        function unique(arr) {
+          var res = [];
+          for (var i = 0; i < arr.length; i++) {
+            for (var j = 0; j < res.length; j++) {
+              if (arr[i] === res[j]) {
+                break;
+              }
+            }
+            if (j === res.length) {
+              <!-- 说明res还没有arr[i] -->
+              res.push(arr[i])
+            }
+          }
+          return res
+        }
+     ````
+     - indexOf方法
+      ````javascript
+        function unique(arr) {
+          var res = [];
+          for (var i = 0; i < arr.length; i++) {
+            if (res.indexOf(arr[i]) === -1) {
+              res.push(arr[i]);
+              continue;
+            }
+          }
+          return res
+        }
+      ````
+      - 排序后去重
+      ````javascript
+        function unique(arr) {
+          var sortArr = arr.sort();
+          var res = [];
+          var monitor = null
+          for (var i = 0; i < sortArr.length -1; i++) {
+            if (!monitor || monitor !== sortArr[i]) {
+              res.push(sortArr[i]);
+            }
+            monitor = sortArr[i]
+          }
+          return res
+        }
+      ````
+      - filter方法(推荐)
+      ````javascript
+        function unique(arr) {
+          return arr.filter((item, index, array) => array.indexOf(item) === index)
+        }
+      ````
+      - es6方法
+      ````javascript
+        es6数据结构Set类似于数组，但成员唯一，没有重复值。
+        function unique(arr) {
+          var res = new Set(arr);
+          return [...res]
+        }
+
+        Array.from方法可以将 Set 结构转为数组。
+        
+        function unique(arr) {
+          var res = new Set(arr);
+          return Array.from(new Set(array));
+        }
+      ````
   9. 如何用正则实现 string.trim() ？
   10. JS 原型是什么， prototype和__proto__的关系是什么？
   11. ES 6 中的 class 了解吗？
   12. JS 如何实现继承？
   13. new操作符做了什么？
-  14. null和undefined的区别？
+  14. null和undefined的区别？如何判断为NaN数据
   15. call() 和 apply() 的区别和作用， bind？
   16. JavaScript 的 typeof 返回哪些数据类型?
   17. 至少 3 种强制类型转换和 2 种隐式类型转换?
