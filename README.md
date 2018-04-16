@@ -341,8 +341,13 @@
           return Array.from(new Set(array));
         }
       ````
-  9. 如何用正则实现 string.trim() ？
-  10. JS 原型是什么， prototype和__proto__的关系是什么？
+  9. 如何用正则实现 string.trim() ？  
+    答：String.prototype.trim = () => this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/, '');
+  10. JS 原型是什么， prototype和__proto__的关系是什么？    
+    答：prototype只有构造函数才有该属性，后天赋于的。  
+    proto/[[prototype]]是任何对象都有的，是私有的，天生自带的; 
+    __proto__是js的非标准但浏览器支持的属性。
+    <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/prototype.png" alt="GitHub" title="prototype" width="400" height="100" />
   11. ES 6 中的 class 了解吗？
   12. JS 如何实现继承？
   13. new操作符做了什么？
