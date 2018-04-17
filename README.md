@@ -343,18 +343,161 @@
       ````
   9. 如何用正则实现 string.trim() ？  
     答：String.prototype.trim = () => this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/, '');
-  10. JS 原型是什么， prototype和__proto__的关系是什么？    
+  10. prototype和__proto__的关系是什么？    
     答：prototype只有构造函数才有该属性，后天赋于的。  
     proto/[[prototype]]是任何对象都有的，是私有的，天生自带的; 
-    __proto__是js的非标准但浏览器支持的属性。
+    __proto__是js的非标准但浏览器支持的属性。链关系的查找通过__proto__方式，如：obj.__proto__.__proto__
     <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/prototype.png" alt="GitHub" title="prototype" width="400" height="100" />
-  11. ES 6 中的 class 了解吗？
-  12. JS 如何实现继承？
-  13. new操作符做了什么？
-  14. null和undefined的区别？如何判断为NaN数据
+  11. JS 如何实现继承？  
+    答：  
+      - 类继承  
+      ````javascript
+        var obj = { a: 1}
+        var myObj = Object.create(obj)
+        myObj.a    // 1
+      ````  
+      - 构造器继承  
+      ````javascript
+      var Foo = function() {
+        this.str = 'foo';
+      }
+      Foo.prototype = {
+        get: function() {
+          return this.str
+        },
+        set: function(val) {
+          this.str= val
+        }
+      }
+      var bar = new Foo();
+      bar.str // foo
+      ```` 
+      - [原型继承](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014344997013405abfb7f0e1904a04ba6898a384b1e925000)  
+      ````javascript
+        function Foo(name) {
+          this.name = name
+        }
+        Foo.prototype.myName = function() {
+          return this.name
+        }
+        function Bar(name, label) {
+          Foo.call(this,name) 
+          this.label = label
+        }
+        Bar.prototype = Object.create(Foo.prototype);
+        Bar.prototype.constructor = Bar;
+        Bar.prototype.myLabel = function() {
+          return this.label
+        }
+        var test = new Bar('helloName', 'helloLabel');
+        test.myLabel();  // hellloLabel
+        test.myName();  // hellloName
+      ````
+      - Mixin  
+      ````javascript
+        function Mixin(sourceObj, targetObj) {
+          for (var key in sourceObj) {
+            if (!targetObj[key]) {
+              targetObj[key] = sourceObj[key]
+            }
+          }
+          return targetObj
+        }
+      ````
+      - 寄生继承    
+      ````javascript
+        function Vehicle() {
+          this.engines = 1
+        }
+        Vehicle.prototype = {
+          ignition: function() {
+            console.info('turning on my engine')
+          },
+          drive: function() {
+            this.ignition();
+            console.info('steering and moving forward')
+          }
+        }
+        /*寄生类*/
+        function Car() {
+          var car = new Vehicle();
+          car.wheels = 4;
+          var vehDrive = car.drive;
+          car.drive = function () {
+            vehDrive.call(this);
+            console.info('car drive')
+          }
+          return car
+        }
+
+        var myCar = new Car();
+      ````
+      - es6的class方式  
+      ````javascript
+        class A {
+          constructor(str) {
+            this.str = str;
+          }
+        }
+
+        class B extends A {
+          constructor(str) {
+            super(str)
+          }
+        }
+      ````
+      - call和apply修改this指向的继承
+
+  12. 至少 3 种强制类型转换和 2 种隐式类型转换?    
+    答： 强类型转换：String、Number、Boolean
+        隐式类型转换：  
+        (1) 字符串 + 数字， 数字转换为字符串。'a' + 1 -> 'a1'  
+        (2) 数字减字符串，字符串转数字。如果字符串不是纯数字就会转成NaN。 1 - 'a' -> NaN; 1 - '-2' -> -1  
+        (3) 乘、除、大于、小于算法同(2)  
+        (4) == 
+         - undefined等于null; undefined == null;  
+         - 字符串和数字比较时，字符串转数字。  
+         - 数字为布尔比较时，布尔转数字。  
+         - 字符串和布尔比较时，两者转数字
+  13. new操作符做了什么？  
+    答：   
+    a. 创建一个新的对象
+    b. 这个新对象会执行[[prototype]]/__proto__链接
+    c. 这个新对象会绑定到函数，调用this
+    d. 如果函数没有返回其它对象，那么new表达式中的函数调用会自动绑定这个新对象
+  14. null和undefined的区别？如何判断为NaN数据？  
+    答：null是一个表示“无”的对象，转为数值时为0, typeof null输出“object”
+        (1) 作为函数的参数，表示该函数的参数是对象  
+        (2) 作为对象原型链的终点  
+        - - -
+     undefined是一个表示“无”的原始值，转化数值为NaN, typeof undefined输出"undefined"  
+        (1) 变量声明了，但没有赋值，等于undefined
+        (2) 调用函数时，应该提供的参数没有提供，该参数等于undeined;
+        (3) 对象没有赋值的属性，该属性的值为undefined  
+        (4) 函数没有返回值时，默认返回undefined
+
+    当算术运算返回一个未定义或无法表示的值时，NaN就产生了。NaN的值表示不是一个数字(Not a number),typeof NaN 输出“number”,判断NaN方法
+      (1)Number.isNaN()或者isNaN
+      (2)如果isNaN函数的参数不是Number类型，isNaN会先尝试将参数转换为数值再判断  
+````javascript
+  var isNaN = function(value) {
+    var n = parseInt(value);
+    return n !== n
+  }
+````  
+      (3)和全局isNaN相比，Number.isNaN不会进行强制转换
+````javascript
+Number.isNaN = Number.isNaN || function(value) {
+  return typeof value === "number" && isNaN(value)
+}
+````
+      
   15. call() 和 apply() 的区别和作用， bind？
-  16. JavaScript 的 typeof 返回哪些数据类型?
-  17. 至少 3 种强制类型转换和 2 种隐式类型转换?
+    答：call和apply用来调用函数，call参数一个一个传入，apply参数是以数组方式。都属于立即执行。  
+      call和apply作用是改变this指向。
+      bind绑定后会生成新的函数，调用时才执行，并不会立即执行
+  16. JavaScript 的 typeof 返回哪些数据类型?  
+    答：typeof返回数据类型string、number、boolean、undefined、object、Symbol、Function
 
 ## DOM
   1. DOM 事件模型是什么？
@@ -386,3 +529,5 @@
   5. react在setState后发生了什么（直接说了setState源码）
   6. flux解释
   8. 对react有什么了解（直接说了react中虚拟dom内部表示，mount过程源码和同步过程源码）
+
+## es6和es7的理解
