@@ -498,16 +498,22 @@ Number.isNaN = Number.isNaN || function(value) {
       bind绑定后会生成新的函数，调用时才执行，并不会立即执行
   16. JavaScript 的 typeof 返回哪些数据类型?  
     答：typeof返回数据类型string、number、boolean、undefined、object、Symbol、Function
-
-## DOM
-  1. DOM 事件模型是什么？
-  2. 事件委托是什么？有什么好处？
+  17. DOM 事件模型是什么？
+    答：
+  18. 事件委托是什么？有什么好处？
 
 ## HTTP
-  1. HTTP 状态码知道哪些？
+  1. HTTP 状态码知道哪些？  
+        | 状态码        | 相应类别           | 原因短语  |
+        | ------------- |--------------| --------|
+        | 1XX      | 信息性状态码 | 服务器正在处理请求 |
+        | 2XX      | 成功状态码      |   请求已正常处理完毕 |
+        | 3XX | 重定向状态码      |    需要进行额外操作以完成请求 |
+        | 4XX | 客户端错误状态码      |    客户端原因导致服务器无法处理请求 |
+        | 5XX | 服务器错误状态码      |    服务器原因导致处理请求出错 |
   2. 301 和 302 的区别是什么？
   3. HTTP 缓存怎么做？
-  4. Cache-Control 和 Etag 的区别是什么？
+  4. [Cache-Control 和 Etag 的区别是什么？](https://github.com/rccoder/blog/issues/12)
   5. Cookie 是什么？Session 是什么？localstorage是什么
   6. LocalStorage 和 Cookie 的区别是什么？
   7. GET 和 POST 的区别是什么？
