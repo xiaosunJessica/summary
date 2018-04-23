@@ -498,9 +498,20 @@ Number.isNaN = Number.isNaN || function(value) {
       bind绑定后会生成新的函数，调用时才执行，并不会立即执行
   16. JavaScript 的 typeof 返回哪些数据类型?  
     答：typeof返回数据类型string、number、boolean、undefined、object、Symbol、Function
-  17. DOM 事件模型是什么？
-    答：
-  18. 事件委托是什么？有什么好处？
+  17. [DOM 事件模型是什么？](http://javascript.ruanyifeng.com/dom/event.html)  
+    答：a: EventTarget接口的三个实例方法：  
+        - addEventListener: 绑定事件的监听函数，可以添加多个监听函数，能指定是在捕获还是冒泡阶段触发监听函数
+        - removeEventListener: 移除事件的监听函数  
+        - dispatchEvent: 触发事件  
+        b: HTML的on-属性（只在冒泡阶段触发，违反了HTML与javascript代码分离的原则，写在一起不利于代码分工）   
+        c: 元素节点的事件属性，如div.onclick;也只在冒泡阶段触发，同一事件只能定义一个监听函数，定义多个时，后一个会覆盖前一个  
+        d: 事件的传播:
+        - 第一阶段: 从window对象传导到目标节点（上层传到底层）, 称为"捕获阶段"
+        - 第二阶段: 在目标节点上触发，称为"目标阶段"
+        - 第三阶段：从目标节点传导回window对象（底层传回到上层）,称为"冒泡阶段"
+  18. [事件委托是什么？有什么好处？](https://zhuanlan.zhihu.com/p/26536815)  
+    答：事件委托就是把一个元素相应事件的函数委托到另一个元素；一般来讲，把一个或一组元素的事件绑定到它的父层或更外层上面，真正绑定事件是在外层，当事件触发该元素上，通过冒泡触发它的外层元素，从而执行函数。  
+    好处： 减少内存消耗，减少重复工作
 
 ## HTTP
   1. HTTP 状态码知道哪些？  
