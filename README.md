@@ -2,13 +2,14 @@
 
  ## HTML
   1. 你是如何理解HTML语义的？  
-    答：使用合适的标签标示内容。优点在于标签语义化有利于搜索引擎建立索引进行抓取，有助于构建良好的HTML结构便于团队开发和维护。
+    答：使用合适的标签标示内容。优点在于标签语义化有利于搜索引擎建立索引进行抓取，有助于构建良好的HTML结构，便于团队开发和维护。
   2. meta viewport 是做什么用的，怎么写？  
     答：meta表示不能被HTML的其它元素（link，script,base, style, title）之一表示的任何元素信息。viewpoint让web开发者控制视口的尺寸及比例,移动设备的viewpoint指设备屏幕上用来展示网页的那一块区域，也就是浏览器上用来展示网页的那部分，可能比浏览器的可视区大，也可能比浏览器可视区域小，一般情况，比浏览器可视区域大。使用方式是<meta name="viewpoint" content="width=device-width, initial-scale=1, maximum-scale=1">
   3. canvas 元素是干什么的？  
     答： canvas是用来绘制图形的HTML元素。
   4. html5新特性？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？  
-    答：[html5新特性](http://www.ganecheng.tech/blog/52819118.html)：
+    答：  
+    [html5新特性](http://www.ganecheng.tech/blog/52819118.html)：
       - 语义特性: header footer
       - 本地存储特性： localStorage, manifest
       - 设备访问特性: Geolocation
@@ -16,7 +17,7 @@
       - 网页多媒体特性: audio、video标签
       - 三维、图形及特效：SVG，Canvas, css3D
       - 性能、集成特性  
-      ***
+      ****
       解决兼容性的方法：  
       - 在IE8以下，通过document.createElement(新标签)，并设置css样式。document.createElement('header'), header {display: block};
       - 条件注释的方式
@@ -27,13 +28,12 @@
         ```
       ***
       HTML和HTML5
-      - 文档类型声明上：  
-       html:
+      - 文档类型声明上：    
+    html:
        ```html
         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
           <html xmlns="http://www.w3.org/1999/xhtml">
        ```
-
       html5: 
       ```html
         <!doctype html>  
@@ -202,7 +202,9 @@
 ## JS
   1. JS 有哪些数据类型？  
     答： js基本数据类型：String、Number、Boolean、Null、undefined。混合数据类型Object(Array)
-  2. [Promise 怎么使用?](https://github.com/xieranmaya/blog/issues/3)
+  2. [Promise 怎么使用?](https://github.com/xieranmaya/blog/issues/3)  
+      [promise原理与实现](https://juejin.im/post/5a59f8b5f265da3e3a6dbec3#heading-10)
+      promise函数时同步的，promise.then函数时异步的setTimeout
       ````javascript
       //声明一个对象
       var promise = new Promise(function(resolve, reject) {
@@ -237,9 +239,9 @@
 
   4. 闭包是什么?函数表达式与函数声明的区别？  
     答： 闭包是在函数外依然能访问函数里的内容。函数声明包括函数名和函数体function func() {},函数表达式是将函数定义为表达式语句的一部分 var func = function() {}
-  5. 什么是立即执行函数？使用立即执行函数的目的是什么？
+  5. 什么是立即执行函数？使用立即执行函数的目的是什么？  
     答：立即执行函数就是声明一个匿名函数，并马上调用它。使用立即执行函数的目的是创建一个独立的作用域
-  6. async/await 语法了解吗？
+  6. async/await 语法了解吗？  
     答：async返回的是promise对象，一旦遇到await就会先返回，等到异步操作完成再接着执行函数体内后面的语句。async函数内部的异步操作执行完，才会执行then方法指定的回调函数。await命令后面是一个promise对象，如果不是，会被立即转换成resolve的promise对象。await后面的promise变成reject后，async函数会中断，没有执行的函数也不会继续执行，为解决该问题可以采用try...catch方式
   7. 如何实现浅拷贝和深拷贝？  
     答：浅拷贝是拷贝原对象的引用；浅拷贝只是将对象的各个属性一次进行拷贝，不会进行递归拷贝
@@ -479,20 +481,20 @@
     当算术运算返回一个未定义或无法表示的值时，NaN就产生了。NaN的值表示不是一个数字(Not a number),typeof NaN 输出“number”,判断NaN方法
       (1)Number.isNaN()或者isNaN
       (2)如果isNaN函数的参数不是Number类型，isNaN会先尝试将参数转换为数值再判断  
-````javascript
-  var isNaN = function(value) {
-    var n = parseInt(value);
-    return n !== n
-  }
-````  
-      (3)和全局isNaN相比，Number.isNaN不会进行强制转换
+  ````javascript
+    var isNaN = function(value) {
+      var n = parseInt(value);
+      return n !== n
+    }
+  ````  
+            (3)和全局isNaN相比，Number.isNaN不会进行强制转换
 ````javascript
 Number.isNaN = Number.isNaN || function(value) {
   return typeof value === "number" && isNaN(value)
 }
 ````
       
-  15. call() 和 apply() 的区别和作用， bind？
+  15. call() 和 apply() 的区别和作用， bind？  
     答：call和apply用来调用函数，call参数一个一个传入，apply参数是以数组方式。都属于立即执行。  
       call和apply作用是改变this指向。
       bind绑定后会生成新的函数，调用时才执行，并不会立即执行
@@ -515,27 +517,73 @@ Number.isNaN = Number.isNaN || function(value) {
 
 ## HTTP
   1. HTTP 状态码知道哪些？  
-        | 状态码        | 相应类别           | 原因短语  |
-        | ------------- |--------------| --------|
-        | 1XX      | 信息性状态码 | 服务器正在处理请求 |
-        | 2XX      | 成功状态码      |   请求已正常处理完毕 |
-        | 3XX | 重定向状态码      |    需要进行额外操作以完成请求 |
-        | 4XX | 客户端错误状态码      |    客户端原因导致服务器无法处理请求 |
-        | 5XX | 服务器错误状态码      |    服务器原因导致处理请求出错 |
+
+  | 状态码        | 相应类别           | 原因短语  |
+  | ------------- |--------------| --------|
+  | 1XX      | 信息性状态码 | 服务器正在处理请求 |
+  | 2XX      | 成功状态码      |   请求已正常处理完毕 |
+  | 3XX | 重定向状态码      |    需要进行额外操作以完成请求 |
+  | 4XX | 客户端错误状态码      |    客户端原因导致服务器无法处理请求 |
+  | 5XX | 服务器错误状态码      |    服务器原因导致处理请求出错 |
   2. 301 和 302 的区别是什么？
   3. HTTP 缓存怎么做？
-  4. [Cache-Control 和 Etag 的区别是什么？](https://github.com/rccoder/blog/issues/12)
-  5. Cookie 是什么？Session 是什么？localstorage是什么
-  6. LocalStorage 和 Cookie 的区别是什么？
+  4. [Cache-Control 和 Etag 的区别是什么？](https://github.com/rccoder/blog/issues/12)  
+    答：带条件的缓存方式Etag和last-modified, 分别对应request-headers下的if-none-match和if-modified-since,如果本地有相关资源的缓存，并且缓存的response headers下有etag或last-modified的情况，这时候去请求服务器，它就是带有条件的get。服务器接到带有该条件的请求，去判断缓存的资源是否是最新的，如果是最新的返回304,否则焕发200。  
+    另一个对上述的优化是在response headers里加Cache-Control: max-age=*****或expires:,两个若同时存在，则CaChe-Control优先级大于expires，这两个会在服务器请求之前。
+  5. Cookie 是什么？Session 是什么？localstorage是什么？
+
+  | 特性 | Cookie | localStorage | sessionStorage |
+  | -----------| ----------- | ----------- | ----------- |
+  | 数据的生命周期 | 关闭浏览器后失效 | 除非被清除， 否则永久保存 | 当前会话有效，关闭浏览器清除 |
+  | 存放大小 | 4k左右 | 5M | 5M |
+  | 与服务器通信 | 每次会携带在HTTP头中，cookie保存过多数据会带来性能问题 | 仅在客户端中，不参与服务器通信 | 仅在客户端中，不参与服务器通信 |
+  6. 同步和异步的区别?  
+    答： 同步是实时处理，异步是分时处理。同步往往会阻塞，没数据过来就等着；异步不会阻塞，没数据来时可以做其它事，有数据了再去处理。同步一定程度上可以看成单线程，异步可以看做多线程
   7. GET 和 POST 的区别是什么？
-  8. 怎么跨域？JSONP 是什么？CORS 是什么？postMessage 是什么？
+  8. 怎么跨域？JSONP 是什么？CORS 是什么？postMessage 是什么？  
+    答： 跨域是只要协议、域名、端口有任何一个不同，都被当做是不同的域。    
+         CORS(Cross-Origin Resource Sharing)跨域资源共享：定义了必须在访问开宇资源时，浏览器与服务器应该如何沟通， 基本思想是使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或相应是应该成功还是失败。  
+         JSONP方式是将返回的数据包含在回调函数中使用，例如：  
+  <code>
+    <script type="text/javascript">
+      function dosomething(jsondata){
+          /*处理获得的json数据*/
+      }
+    </script>
+    <script src="http://example.com/data.php?callback=dosomething"></script>
+  </code>
+
+  JSONP的优点是不想ajax的XMLHttpRequest那样受同源策略的限制，兼容性更好，古老的浏览器也能使用，缺点是只能进行get方式，post不支持。  
+  window.postMessage(message, targetOrigin)方法是html5新引入的特性，可以使用它来向其它window对象发送消息。
   9. http 2.0对于http 1.x有哪些优点？
   10. XML和JSON的区别？
-  11. 同步和异步的区别?
 
 ## WEBPACK
-  1. 转译出的文件过大怎么办？
-  2. 转译速度慢什么办？
+  1. [转译出的文件过大怎么办？](https://www.jianshu.com/p/367dc422393f)   
+    答： a: 代码压缩：UglifyJsPlugin,使用这个会使编译速度变慢，一般在生成环境启用。  
+        b: 代码分割：
+        ````javascript
+        output: {
+            path: __dirname + 'xx',
+            publicPath: xxx,
+            filename: 'bundle.js'
+        }
+        ````
+        c: css单独打包
+        ````javascript
+        // 引入 css 单独打包插件
+      var ExtractTextPlugin = require('extract-text-webpack-plugin');
+      // 设置生成css 的路径和文件名，会自动将对应entry入口js文件中引入的CSS抽出成单独的文件
+      var packCSS = new ExtractTextPlugin('./css/[name].min.css');
+
+        ````
+        d: 去除不必要的插件
+        e: 提取第三方库
+  2. [转译速度慢什么办？](http://www.cnblogs.com/imwtr/p/7801973.html)      
+    答： a: 使用监听模式或热更新替换（--watch和hotModuleReplacementPlugin）  
+    b: babel-loader开启缓存  
+    c: 提取公共代码， 使用CommonsChunkPlugin提取公共模块，可减少文件体积，有助于浏览器的文件缓存
+    d: 优化搜索路径，exclude的配置避免多余文件的查找
   3. 写过 webpack loader 吗？
 
 ## React
