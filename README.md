@@ -167,17 +167,17 @@
   7. CSS3哪些新特性? 新增伪类有那些？  
     答：css3新特性：圆角（border-radius）、阴影（box-shadow\text-shadow）、渐变（gradients）、过度与动画（transition and animations）,新的布局方式：多列布局（column）、flex、grid。  
     新增伪类：  
-      新增伪类 | 作用 
-      ----- | -------
-      p:first-of-type | 选择该父节点下的首个p元素
-      p:last-of-type | 选择该父节点下的最后p元素
-      p:only-of-type | 选择该父节点下，含有一个p元素的p节点，p可以有兄弟节点
-      p:only-child | 选择该父节点下，含有唯一一个元素且为p,不含有兄弟节点
-      p:nth-child | 选择该父节点下的第n个p节点
-      p:nth-last-child | 选择该父节点下的倒数第n个p节点
-      p:last-child | 选择该父节点下的最后一个p节点
-      p: empty | 选择没有子节点的p
-      :not(p) | 选择非p的每个元素
+      |新增伪类 | 作用|
+      |----- | -------|
+      |p:first-of-type | 选择该父节点下的首个p元素|
+      |p:last-of-type | 选择该父节点下的最后p元素|
+      |p:only-of-type | 选择该父节点下，含有一个p元素的p节点，p可以|有兄弟节点|
+      p:only-child | 选择该父节点下，含有唯一一个元素且为p,不含有|兄弟节点|
+      |p:nth-child | 选择该父节点下的第n个p节点|
+      |p:nth-last-child | 选择该父节点下的倒数第n个p节点|
+      |p:last-child | 选择该父节点下的最后一个p节点|
+      |p: empty | 选择没有子节点的p|
+      |:not(p) | 选择非p的每个元素|
 
   8. 说下行内元素和块级元素的区别？行内块元素的兼容性使用？  
     答： 
