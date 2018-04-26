@@ -647,3 +647,4 @@ Number.isNaN = Number.isNaN || function(value) {
   8. 对react有什么了解（直接说了react中虚拟dom内部表示，mount过程源码和同步过程源码）
 
 ## es6和es7的理解
+## 各个模块化的了解
