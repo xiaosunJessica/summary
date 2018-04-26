@@ -166,7 +166,8 @@
   - dom控制问题: link样式，在js中操作dom可修改样式；@import不支持修改
   7. CSS3哪些新特性? 新增伪类有那些？  
     答：css3新特性：圆角（border-radius）、阴影（box-shadow\text-shadow）、渐变（gradients）、过度与动画（transition and animations）,新的布局方式：多列布局（column）、flex、grid。  
-    新增伪类：  
+    新增伪类： 
+     
       |新增伪类 | 作用|
       |----- | -------|
       |p:first-of-type | 选择该父节点下的首个p元素|
@@ -197,7 +198,12 @@
   - 检查页面是否闭合
   - 样式排除法
   - 检查是否清除浮动
-  - IE是否触发haslayout
+  - IE是否触发haslayout  
+  10. 父容器width和height分别为200 * 100， 子元素设置margin:50%时（考点包括margin百分比都是针对宽度，内联的上下都不起作用）
+  11. css手写checkbox(完全不用js)
+  12. AB里面的容器不等高，如何做到使两个背景等高？
+  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/AB1.png" alt="GitHub" title="border-box" width="200" height="200" />
+  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/AB2.png" alt="GitHub" title="border-box" width="200" height="200" />
 
 ## JS
   1. JS 有哪些数据类型？  
@@ -236,6 +242,8 @@
       // 发送请求
       xhr.send()
       ````
+
+      使用Promise实现ajax ????
 
   4. 闭包是什么?函数表达式与函数声明的区别？  
     答： 闭包是在函数外依然能访问函数里的内容。函数声明包括函数名和函数体function func() {},函数表达式是将函数定义为表达式语句的一部分 var func = function() {}
@@ -513,7 +521,50 @@ Number.isNaN = Number.isNaN || function(value) {
         - 第三阶段：从目标节点传导回window对象（底层传回到上层）,称为"冒泡阶段"
   18. [事件委托是什么？有什么好处？](https://zhuanlan.zhihu.com/p/26536815)  
     答：事件委托就是把一个元素相应事件的函数委托到另一个元素；一般来讲，把一个或一组元素的事件绑定到它的父层或更外层上面，真正绑定事件是在外层，当事件触发该元素上，通过冒泡触发它的外层元素，从而执行函数。  
-    好处： 减少内存消耗，减少重复工作
+    好处： 减少内存消耗，减少重复工作  
+  19. 箭头函数考点
+    ····javascript
+    a => a
+    a => {a}
+    a => ({a})
+    a => ({[a]: a})
+    ····
+  20. 'b' + 'a' ++'a' +'a' 
+  21. [0] == '0'以及[] == 0
+  22. 
+  ....html
+  <div id="d">
+    <div id="a"></div>
+    <div id="b"></div>
+    <div id="c"></div>
+  </div>
+  ....
+  ....javascript
+  var a = [
+    document.getElementById('a'),
+    document.getElementById('b'),
+    document.getElementById('c'),
+  ];
+  var b = document.getElementById('d').getElementByTagName('div')
+  ....
+  请问a, b有什么异同？  
+  23. 为数组设计一个distinct方法
+  如：[1,2,3,1,'2'].distinct() = [1,2,3,'2'],请提供几种思路，至少写一个
+  24. 实现空格分隔字符串
+  如： 'Hello'.specify() = 'H e l l o'
+  24. 
+  function A() {
+
+  }
+
+  function B(a) {
+    this.a = a
+  }
+
+  A.prototype.a = 1;
+  B.prototype.a = 1;
+  console.info(new A().a)
+  console.info(new B().a)
 
 ## HTTP
   1. HTTP 状态码知道哪些？  
