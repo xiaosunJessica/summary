@@ -207,7 +207,16 @@
   11. css手写checkbox(完全不用js)
   12. AB里面的容器不等高，如何做到使两个背景等高？
   <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/AB1.png" alt="GitHub" title="border-box" width="200" height="200" />
-  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/AB2.png" alt="GitHub" title="border-box" width="200" height="200" />
+  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/AB2.png" alt="GitHub" title="border-box" width="200" height="200" />  
+  13. position的理解  
+
+     取值 | 描述  
+    -------| ---------  
+    static | 正常布局，top、bottom、left、right、z-index不起作用 
+    relatvie | 会留空白，放在正常位置上  
+    absolute | 脱离文档，不留空白，相对于非static的祖先元素定位 
+    fixed | 脱离文档，不留空白，相对于屏幕视口的位置定位  
+
 
 ## JS
   1. JS 有哪些数据类型？  
@@ -355,6 +364,13 @@
           return Array.from(new Set(array));
         }
       ````
+
+    为数组设计一个distinct方法  
+    如：[1,2,3,1,'2'].distinct() = [1,2,3,'2'],请提供几种思路，至少写一个
+    Array.prototype.distinct = function() { //这里不适合用箭头函数，不然this指向window
+      let arr = this;
+      return arr.filter((item, index, arr) => arr.indexOf(item) === index)
+    }
   9. 如何用正则实现 string.trim() ？  
     答：String.prototype.trim = () => this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/, '');
   10. prototype和__proto__的关系是什么？    
@@ -535,14 +551,15 @@ Number.isNaN = Number.isNaN || function(value) {
     ····
   20. 'b' + 'a' ++'a' +'a' 
   21. [0] == '0'以及[] == 0
-  22. 
-  ....html
+  22.  
+
+  ····html
   <div id="d">
     <div id="a"></div>
     <div id="b"></div>
     <div id="c"></div>
   </div>
-  ....
+  ····
   ....javascript
   var a = [
     document.getElementById('a'),
@@ -551,11 +568,14 @@ Number.isNaN = Number.isNaN || function(value) {
   ];
   var b = document.getElementById('d').getElementByTagName('div')
   ....
-  请问a, b有什么异同？  
-  23. 为数组设计一个distinct方法
-  如：[1,2,3,1,'2'].distinct() = [1,2,3,'2'],请提供几种思路，至少写一个
-  24. 实现空格分隔字符串
+  请问a, b有什么异同？    
+  .   
+  23. 实现空格分隔字符串
   如： 'Hello'.specify() = 'H e l l o'
+    String.prototype.specify = function() {
+      let string = this;
+      return string.split('').join(' ')
+    }
   24. 
   function A() {
 
@@ -567,8 +587,11 @@ Number.isNaN = Number.isNaN || function(value) {
 
   A.prototype.a = 1;
   B.prototype.a = 1;
-  console.info(new A().a)
-  console.info(new B().a)
+  console.info(new A().a) // 输出1
+  console.info(new B().a) // 输出 undefined
+  因为首先查找自身属性是否含有a,有就取值自己的（B含有，且为undefined）,否则，通过原型链查找原型链上的。
+25. [数组](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)和[字符串](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)操作方法？ 
+26. 'b' + 'a' + +'a' +'a'  ——》 ‘baNaNa’
 
 ## HTTP
   1. HTTP 状态码知道哪些？  
@@ -612,6 +635,10 @@ Number.isNaN = Number.isNaN || function(value) {
   window.postMessage(message, targetOrigin)方法是html5新引入的特性，可以使用它来向其它window对象发送消息。
   9. http 2.0对于http 1.x有哪些优点？
   10. XML和JSON的区别？
+  11. 浏览器的hash和history两种路由机制？
+   hash是带#号的，浏览器发送url请求时，#后面的不会发送给服务端。#用于浏览器滚动到#后面值的位置。
+   histroy更美观，每次输入都会发送请求，而且未找到资源会发出404错误。
+  12. [原型的理解](http://www.cnblogs.com/changyangzhe/articles/5702241.html)
 
 ## WEBPACK
   1. [转译出的文件过大怎么办？](https://www.jianshu.com/p/367dc422393f)   
@@ -640,15 +667,27 @@ Number.isNaN = Number.isNaN || function(value) {
     c: 提取公共代码， 使用CommonsChunkPlugin提取公共模块，可减少文件体积，有助于浏览器的文件缓存
     d: 优化搜索路径，exclude的配置避免多余文件的查找
   3. 写过 webpack loader 吗？
+  4. loader与plugin区别？
 
 ## React
   1. 你对 react 有什么理解？基于 react 的开发模式比起传统 jqurey 开发模式的最大优势(可以有几个)是什么？
+  答： 理解： 通过Virtual DOM和Diff算法隔离DOM操作；采用单项数据流，可跟踪；组件化，JSX自定义标签，便于抽象化。
+  优点：react无需直接操作DOM，事件通过改变state间接操作DOM
   2. 你对异步模型有哪些理解？
   3. 前后端分离的原理及意义？
-  4. 你对页面进行性能优化的思路和思想是什么？
+  答：原理：后端提供接口，前端获取数组呈现.
+  意义： 前后端解耦，同步开发，提高效率。
+  4. 你对页面进行性能优化的思路和思想是什么？答： 减少http请求，减少DOM操作，避免不必要的重绘和重排l;压缩文件体积；采用CDN；
   5. react在setState后发生了什么（直接说了setState源码）
+  当this.setState调用后，新的State没有立即生效，而是通过ReactUpdate.batchedUpdate存入临时的队列中。当一个transaction完成后，才通过ReactUpdate.flushBatchedUpdates将所有临时state merge并计算新的props和state
+  [思维发散问题](https://juejin.im/post/59a699fd6fb9a0247d4f5970
+  )
   6. flux解释
   8. 对react有什么了解（直接说了react中虚拟dom内部表示，mount过程源码和同步过程源码）
 
 ## es6和es7的理解
+[es6](http://www.cnblogs.com/changyangzhe/articles/5702241.html)
 ## 各个模块化的了解
+
+## git
+  rebase和merge区别
