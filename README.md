@@ -4,7 +4,11 @@
   1. 你是如何理解HTML语义的？  
     答：使用合适的标签标示内容。优点在于标签语义化有利于搜索引擎建立索引进行抓取，有助于构建良好的HTML结构，便于团队开发和维护。
   2. meta viewport 是做什么用的，怎么写？  
-    答：meta表示不能被HTML的其它元素（link，script,base, style, title）之一表示的任何元素信息。viewpoint让web开发者控制视口的尺寸及比例,移动设备的viewpoint指设备屏幕上用来展示网页的那一块区域，也就是浏览器上用来展示网页的那部分，可能比浏览器的可视区大，也可能比浏览器可视区域小，一般情况，比浏览器可视区域大。使用方式是<meta name="viewpoint" content="width=device-width, initial-scale=1, maximum-scale=1">
+    答：meta表示不能被HTML的其它元素（link，script,base, style, title）之一表示的任何元素信息。viewpoint让web开发者控制视口的尺寸及比例，移动设备的viewpoint指设备屏幕上用来展示网页的那一块区域，也就是浏览器上用来展示网页的那部分，可能比浏览器的可视区大，也可能比浏览器可视区域小，一般情况，比浏览器可视区域大。属性包括width、height、initial-scale、maximum-scale、minimum-scale,使用方式是  
+
+  ````javascript
+  <meta name="viewpoint" content="width=device-width, initial-scale=1, maximum-scale=1">
+  ````
   3. canvas 元素是干什么的？  
     答： canvas是用来绘制图形的HTML元素。
   4. html5新特性？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？  
@@ -53,11 +57,11 @@
     答： Doctype是document type(文档类型)，告诉浏览器解析器采用哪种规范（html、xhtml）来解析页面，Doctype不存在或格式错误的情况下，采用兼容模式。  
     标准模式（严格模式）展示的支持最新标准的网页。兼容模式（松散模式或怪异模式）展示的是兼顾传统浏览器的网页，向后兼容老式浏览器。  
     具体区别：
-       类别 | 标准模式 | 兼容模式
-      ---- | ---- | ----
-      盒模型 | width=元素内容宽度(content-box) | width=width + padding + border(box-sizing)
-      百分比/行内高度 | 给span设置宽高不生效；块级元素的父元素没有高度，子元素的百分比高度无效 | 有效
-      margin: auto | 水平居中有效 | 无效，可用text-align解决
+      |        类别    |     标准模式     |     兼容模式    |
+      | ------------- | ---------------- | -------------- |
+      |盒模型 | width=元素内容宽度(content-box) | width=width + padding + border(box-sizing: border-box)|
+      |百分比/行内高度 | 给span设置宽高不生效；块级元素的父元素没有高度，子元素的百分比高度无效 | 有效|
+      |margin: auto | 水平居中有效 | 无效，可用text-align解决|
 
 ## CSS
   1. 说说盒模型？ box-sizing常用的属性有哪些？分别有什么作用？   
@@ -172,8 +176,8 @@
       |----- | -------|
       |p:first-of-type | 选择该父节点下的首个p元素|
       |p:last-of-type | 选择该父节点下的最后p元素|
-      |p:only-of-type | 选择该父节点下，含有一个p元素的p节点，p可以|有兄弟节点|
-      p:only-child | 选择该父节点下，含有唯一一个元素且为p,不含有|兄弟节点|
+      |p:only-of-type | 选择该父节点下，含有一个p元素的p节点，p可以有兄弟节点|
+      p:only-child | 选择该父节点下，含有唯一一个元素且为p,不含有兄弟节点|
       |p:nth-child | 选择该父节点下的第n个p节点|
       |p:nth-last-child | 选择该父节点下的倒数第n个p节点|
       |p:last-child | 选择该父节点下的最后一个p节点|
@@ -185,7 +189,7 @@
   - 布局上： 行内元素在一行展示，水平排列；块级元素占据一行，垂直排列
   - 结构上： 行内元素不可以插入块级元素，块级元素可以插入行内元素
   - 属性上： 行内元素设置width、height无效，margin和padding上下无效。
-  比较常用的行内元素： a、b、em、i、img、input、label、span、strong、sub、sup、textarea
+  比较常用的行内元素： a、b、em、i、img、input、label、span、strong、sub、sup、textarea  
   行内块元素的兼容性使用：  
   ```html
     div {
@@ -268,7 +272,7 @@
           var targetObj = source.constructor === Array ? [] : {}
           for (var key in source) {
             if (source[key] && typeof source[key] === 'object') {
-              targetObj[key] = source[key].constructor === Array ? [] : {}
+              <!--targetObj[key] = source[key].constructor === Array ? [] : {}-->
               targetObj[key] = deepCopy(source[key])
             } else {
               targetObj[key] = source[key]
@@ -459,7 +463,7 @@
       - call和apply修改this指向的继承
 
   12. 至少 3 种强制类型转换和 2 种隐式类型转换?    
-    答： 强类型转换：String、Number、Boolean
+    答： 强类型转换：String、Number、Boolean  
         隐式类型转换：  
         (1) 字符串 + 数字， 数字转换为字符串。'a' + 1 -> 'a1'  
         (2) 数字减字符串，字符串转数字。如果字符串不是纯数字就会转成NaN。 1 - 'a' -> NaN; 1 - '-2' -> -1  
@@ -471,12 +475,12 @@
          - 字符串和布尔比较时，两者转数字
   13. new操作符做了什么？  
     答：   
-    a. 创建一个新的对象
-    b. 这个新对象会执行[[prototype]]/__proto__链接
-    c. 这个新对象会绑定到函数，调用this
+    a. 创建一个新的对象 
+    b. 这个新对象会执行[[prototype]]/__proto__链接 
+    c. 这个新对象会绑定到函数，调用this 
     d. 如果函数没有返回其它对象，那么new表达式中的函数调用会自动绑定这个新对象
   14. null和undefined的区别？如何判断为NaN数据？  
-    答：null是一个表示“无”的对象，转为数值时为0, typeof null输出“object”
+    答：null是一个表示“无”的对象，转为数值时为0, typeof null输出“object”  
         (1) 作为函数的参数，表示该函数的参数是对象  
         (2) 作为对象原型链的终点  
         - - -
@@ -579,7 +583,7 @@ Number.isNaN = Number.isNaN || function(value) {
   2. 301 和 302 的区别是什么？
   3. HTTP 缓存怎么做？
   4. [Cache-Control 和 Etag 的区别是什么？](https://github.com/rccoder/blog/issues/12)  
-    答：带条件的缓存方式Etag和last-modified, 分别对应request-headers下的if-none-match和if-modified-since,如果本地有相关资源的缓存，并且缓存的response headers下有etag或last-modified的情况，这时候去请求服务器，它就是带有条件的get。服务器接到带有该条件的请求，去判断缓存的资源是否是最新的，如果是最新的返回304,否则焕发200。  
+    答：带条件的缓存方式Etag和last-modified, 分别对应request-headers下的if-none-match和if-modified-since,如果本地有相关资源的缓存，并且缓存的response headers下有etag或last-modified的情况，这时候去请求服务器，它就是带有条件的get。服务器接到带有该条件的请求，去判断缓存的资源是否是最新的，如果是最新的返回304,否则返回200。  
     另一个对上述的优化是在response headers里加Cache-Control: max-age=*****或expires:,两个若同时存在，则CaChe-Control优先级大于expires，这两个会在服务器请求之前。
   5. Cookie 是什么？Session 是什么？localstorage是什么？
 
