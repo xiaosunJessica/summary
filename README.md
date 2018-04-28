@@ -3,7 +3,7 @@
  ## HTML
   1. 你是如何理解HTML语义的？  
     答：使用合适的标签标示内容。优点在于标签语义化有利于搜索引擎建立索引进行抓取，有助于构建良好的HTML结构，便于团队开发和维护。
-  2. meta viewport 是做什么用的，怎么写？  
+  2. meta [viewport](http://blog.doyoe.com/2015/10/13/mobile/%E7%A7%BB%E5%8A%A8%E5%89%8D%E7%AB%AF%E7%AC%AC%E4%B8%80%E5%BC%B9%EF%BC%9Aviewport%E8%AF%A6%E8%A7%A3/) 是做什么用的，怎么写？  
     答：meta表示不能被HTML的其它元素（link，script,base, style, title）之一表示的任何元素信息。viewpoint让web开发者控制视口的尺寸及比例，移动设备的viewpoint指设备屏幕上用来展示网页的那一块区域，也就是浏览器上用来展示网页的那部分，可能比浏览器的可视区大，也可能比浏览器可视区域小，一般情况，比浏览器可视区域大。属性包括width、height、initial-scale、maximum-scale、minimum-scale,使用方式是  
 
   ````javascript
@@ -96,14 +96,14 @@
      **水平居中**
      - 容器上定义一个width,然后设置margin: auto  
      - 父容器的text-align: center,子容器的display:inline-block
-     - 绝对定位，left: 50%; （margin-left: -宽度/2 或者css3 transform: translate(-宽度/2, 0)）
+     - 绝对定位，left: 50%; （margin-left: -宽度/2 或者css3 transform: translate(-宽度/2, 0),其中宽度不确定情况可以使用translate(-50%, 0)）
      - flex方式， justify-content: center
 
      **垂直居中**
      - 单行文本line-height  
      - 行内块级元素 display:inline-block; vertical-align: middle;
      - 元素高度不定，vertical-align只在父层为td或th时生效，并且父元素display: table，其它不起作用, 子元素display: table-cell; vertical-align:middle;  
-      - 绝对定位，top: 50%; （margin-top: -高度/2 或者css3 transform: translate(0, -高度/2)）
+      - 绝对定位，top: 50%; （margin-top: -高度/2 或者css3 transform: translate(0, -高度/2),其中高度不确定情况可以使用translate(0，-50%)）
      - flex方式，align-items: center;
 
   3. 选择器优先级如何确定  
@@ -203,7 +203,7 @@
   - 样式排除法
   - 检查是否清除浮动
   - IE是否触发haslayout  
-  10. 父容器width和height分别为200 * 100， 子元素设置margin:50%时（考点包括margin百分比都是针对宽度，内联的上下都不起作用）
+  10. [父容器width和height分别为200 * 100， 子元素设置margin:50%时](http://blog.doyoe.com/2013/11/30/css/margin%E7%B3%BB%E5%88%97%E4%B9%8B%E7%99%BE%E5%88%86%E6%AF%94/)（考点包括margin百分比都是针对宽度，内联的上下都不起作用）
   11. css手写checkbox(完全不用js)
   12. AB里面的容器不等高，如何做到使两个背景等高？
   <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/AB1.png" alt="GitHub" title="border-box" width="200" height="200" />
@@ -216,6 +216,7 @@
     relatvie | 会留空白，放在正常位置上  
     absolute | 脱离文档，不留空白，相对于非static的祖先元素定位 
     fixed | 脱离文档，不留空白，相对于屏幕视口的位置定位  
+
 
 
 ## JS
@@ -256,10 +257,33 @@
       xhr.send()
       ````
 
-      使用Promise实现ajax ????
+      [ajax清除缓存的方法](https://segmentfault.com/q/1010000002960260)：url + Math.random()
 
-  4. 闭包是什么?函数表达式与函数声明的区别？  
-    答： 闭包是在函数外依然能访问函数里的内容。函数声明包括函数名和函数体function func() {},函数表达式是将函数定义为表达式语句的一部分 var func = function() {}
+      使用Promise实现ajax???  
+      答：
+      ····javascript
+      var request = (opts) => {
+        return new Promise(function(resolve, reject) {
+          var xhr = new XMLHTTPRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState ==4) {
+              if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+                  resolve()
+              } else {
+                  reject()
+              }
+            }
+          }
+          xhr.open(opts.method, opts.url, opts.ansyc);
+          xhr.send() // 如果是post方式，xhr.send(data)
+        })
+      }
+      ····
+
+  4. 闭包是什么?函数表达式与函数声明的区别？什么情况下使用闭包?
+    答： 闭包是在函数外依然能访问函数里的内容。  
+    函数声明包括函数名和函数体function func() {},函数表达式是将函数定义为表达式语句的一部分 var func = function() {}  
+      闭包使用场景： 高阶函数，科里化函数（curry）
   5. 什么是立即执行函数？使用立即执行函数的目的是什么？  
     答：立即执行函数就是声明一个匿名函数，并马上调用它。使用立即执行函数的目的是创建一个独立的作用域
   6. async/await 语法了解吗？  
@@ -684,6 +708,7 @@ Number.isNaN = Number.isNaN || function(value) {
   )
   6. flux解释
   8. 对react有什么了解（直接说了react中虚拟dom内部表示，mount过程源码和同步过程源码）
+  9. combineReduces
 
 ## es6和es7的理解
 [es6](http://www.cnblogs.com/changyangzhe/articles/5702241.html)
