@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .parent {
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .child {
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      border-radius: 50%;
+      background: red;
+      text-align: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="parent" onclick="handleParent()">
+    <div class="child" onclick="handleChild(this)">child</div>
+  </div>
+</body>
+<script>
+  function handleParent() {
+    console.info('handleparent----------')
+  }
+
+  // console.info(document.getElementsByClassName('child')[0], '--------')
+  document.getElementsByClassName('child')[0].onclick = function(e) {
+    console.info(e, '----------')
+  }
+
+  function handleChild(e) {
+    var event = e || window.event;
+    // event.stopPropagation()
+    console.info(e)
+    // e.stopPropagation();
+  }
+</script>
+</html>

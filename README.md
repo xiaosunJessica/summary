@@ -558,7 +558,7 @@ Number.isNaN = Number.isNaN || function(value) {
         - removeEventListener: 移除事件的监听函数  
         - dispatchEvent: 触发事件  
         b: HTML的on-属性（只在冒泡阶段触发，违反了HTML与javascript代码分离的原则，写在一起不利于代码分工）   
-        c: 元素节点的事件属性，如div.onclick;也只在冒泡阶段触发，同一事件只能定义一个监听函数，定义多个时，后一个会覆盖前一个  
+        c: 元素节点的事件属性，如div.onclick;也只在冒泡阶段触发，同一事件只能定义一个监听函数，定义多个时，后一个会覆盖前一个； onclick > on-属性
         d: 事件的传播:
         - 第一阶段: 从window对象传导到目标节点（上层传到底层）, 称为"捕获阶段"
         - 第二阶段: 在目标节点上触发，称为"目标阶段"
