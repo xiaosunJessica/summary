@@ -94,11 +94,11 @@
       ```
 
       box-sizing的常用属性：  
-      - content-box是默认属性，width和height只是内容的宽和高，并不包括padding、border、margin。上面展示的child实际渲染的宽高为260 * 160
+      - content-box是默认属性(w3c标准盒模型)，width和height只是内容的宽和高，并不包括padding、border、margin。上面展示的child实际渲染的宽高为260 * 160
 
       <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/content-box.png" alt="GitHub" title="content-box" width="200" height="200" />
 
-      - border-box, width和height包含了padding和border,但不不含margin。上面展示的child实际渲染的宽高为220 * 120,多了margin的宽高  
+      - border-box(IE盒模型), width和height包含了padding和border,但不不含margin。上面展示的child实际渲染的宽高为220 * 120,多了margin的宽高  
       <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/border-box.png" alt="GitHub" title="border-box" width="200" height="200" />
       
   2. 如何居中  
@@ -138,7 +138,7 @@
       - display: inline-block, table-cell, table-caption, flex, inline-flex
       - overflow为hidden, scroll, auto(不为hidden)                             
   5. 为什么清除浮动？如何清除浮动？  
-    答：
+    答：  
     **原因** 
 
       一个块级元素的高度如果没有设置height,那么其高度由子元素撑开，如果子元素设置float,它脱离了文档流，父元素的高度会忽略。
@@ -186,10 +186,10 @@
   6. 页面导入样式时，使用link和@import有什么区别？  
     答：
 
-  - 加载内容： link是xhtml标签，除了能加载css外，还能加载rss(简单信息聚合——xml文件)；@import只能加载css文件
-  - 加载顺序: link在页面载入的同时加载；@import的css是在页面加载完毕后被加载。
-  - 兼容性问题： link无兼容性问题; @import是css2.1里提出的，低版本不兼容
-  - dom控制问题: link样式，在js中操作dom可修改样式；@import不支持修改
+      - 加载内容： link是xhtml标签，除了能加载css外，还能加载rss(简单信息聚合——xml文件)；@import只能加载css文件
+      - 加载顺序: link在页面载入的同时加载；@import的css是在页面加载完毕后被加载。
+      - 兼容性问题： link无兼容性问题; @import是css2.1里提出的，低版本不兼容
+      - dom控制问题: link样式，在js中操作dom可修改样式；@import不支持修改
 
   7. CSS3哪些新特性? 新增伪类有那些？  
     答：css3新特性：圆角（border-radius）、阴影（box-shadow\text-shadow）、渐变（gradients）、过度与动画（transition and animations）,新的布局方式：多列布局（column）、flex、grid。  
@@ -209,30 +209,42 @@
 
   8. 说下行内元素和块级元素的区别？行内块元素的兼容性使用？  
     答： 
-  - 布局上： 行内元素在一行展示，水平排列；块级元素占据一行，垂直排列
-  - 结构上： 行内元素不可以插入块级元素，块级元素可以插入行内元素
-  - 属性上： 行内元素设置width、height无效，margin和padding上下无效。
-    比较常用的行内元素： a、b、em、i、img、input、label、span、strong、sub、sup、textarea  
-    行内块元素的兼容性使用：  
+      - 布局上： 行内元素在一行展示，水平排列；块级元素占据一行，垂直排列
+      - 结构上： 行内元素不可以插入块级元素，块级元素可以插入行内元素
+      - 属性上： 行内元素设置width、height无效，margin和padding上下无效。比较常用的行内元素： a、b、em、i、img、input、label、span、strong、sub、sup、textarea 
 
-    ```html
-      div {
-        *display: inline;
-        *zoom: 1; // 触发haslayout
-        // display: inline-block; 添加后兼容所有浏览器
-      } 
-    ```
+      行内块元素的兼容性使用：  
+
+        ```html
+          div {
+            *display: inline;
+            *zoom: 1; // 触发haslayout
+            // display: inline-block; 添加后兼容所有浏览器
+          } 
+        ```
   9. zoom的作用
-  - 检查页面是否闭合
-  - 样式排除法
-  - 检查是否清除浮动
-  - IE是否触发haslayout  
-  10. [父容器width和height分别为200 * 100， 子元素设置margin:50%时](http://blog.doyoe.com/2013/11/30/css/margin%E7%B3%BB%E5%88%97%E4%B9%8B%E7%99%BE%E5%88%86%E6%AF%94/)（考点包括margin百分比都是针对宽度，内联的上下都不起作用）  
+
+      - 检查页面是否闭合
+      - 样式排除法
+      - 检查是否清除浮动
+      - IE是否触发haslayout  
+  10. [父容器width和height分别为200 * 100， 子元素设置margin:50%时](http://blog.doyoe.com/2013/11/30/css/margin%E7%B3%BB%E5%88%97%E4%B9%8B%E7%99%BE%E5%88%86%E6%AF%94/)（考点包括margin百分比都是针对宽度，内联的上下都不起作用）
+  a. 子元素的margin的百分比针对于父元素的Width  
+  b. 子元素margin:50%时，左右margin为100px,加自身的width超出了父元素宽度的范围，此时后面的元素会换行。因此，图中的'2222'虽然是inline-block方式，也在下一行。除非前一个margin的左右百分比之和小于50%,才会展示在一排  
+  c. 图中可以看出，子元素margin-top也是50%,所以父元素没有全包子元素，如果希望父元素全包子元素，可以通过在父元素添加overflow: scroll破坏BFC  
   <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/margin-percent.png" alt="GitHub" title="border-box" width="200" height="200" />
-  11. css手写checkbox(完全不用js)
-  12. AB里面的容器不等高，如何做到使两个背景等高？
-  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB1.png" alt="GitHub" title="border-box" width="200" height="200" />
-  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB2.png" alt="GitHub" title="border-box" width="200" height="200" />  
+  11. [使用css重新定义checkbox]  (https://github.com/xiaosunJessica/interview/blob/master/html/css-checkbox.html)   
+    a. 结合input[type='checkbox']和label  
+    b. input[type='checkbox']隐藏掉, label添加伪元素放在input位置处  
+    c. input状态为checked时，将label的伪元素content进行修改
+  12. AB里面的容器不等高，如何做到使两个背景等高？  
+    a. 通过flex方式，让父元素display: flex;  
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB2.png" alt="GitHub" title="border-box" width="200" height="200" />  
+    b. 通过position方式，例如：左侧高度固定，父元素position: relatvie; 右侧position: absolute; top: 0; bottom;  
+     <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB1.png" alt="GitHub" title="border-box" width="200" height="200" />  
+    c. 父元素display: table; 两个子元素display: table-cell.
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB3.png" alt="GitHub" title="border-box" width="200" height="200" /> .
+
   13. position的理解  
 
      取值 | 描述  
@@ -250,6 +262,7 @@
   2. [Promise 怎么使用?](https://github.com/xieranmaya/blog/issues/3)  
       [promise原理与实现](https://juejin.im/post/5a59f8b5f265da3e3a6dbec3#heading-10)
       promise函数时同步的，promise.then函数时异步的setTimeout
+
       ````javascript
       //声明一个对象
       var promise = new Promise(function(resolve, reject) {
@@ -257,9 +270,10 @@
       })
 
       promise.then();
-
       ````
-  3. AJAX 手写一下(基本步骤)?
+
+  3. AJAX 手写一下(基本步骤)?  
+
       ````javascript
       // 实例化对象
       var xhr = new XMLHTTPRequest();
@@ -286,7 +300,8 @@
 
       使用Promise实现ajax???  
       答：
-      ····javascript
+
+      ````javascript
       var request = (opts) => {
         return new Promise(function(resolve, reject) {
           var xhr = new XMLHTTPRequest();
@@ -303,9 +318,9 @@
           xhr.send() // 如果是post方式，xhr.send(data)
         })
       }
-      ····
+      ````
 
-  4. 闭包是什么?函数表达式与函数声明的区别？什么情况下使用闭包?
+  4. 闭包是什么?函数表达式与函数声明的区别？什么情况下使用闭包?  
     答： 闭包是在函数外依然能访问函数里的内容。  
     函数声明包括函数名和函数体function func() {},函数表达式是将函数定义为表达式语句的一部分 var func = function() {}  
       闭包使用场景： 高阶函数，科里化函数（curry）
@@ -315,6 +330,7 @@
     答：async返回的是promise对象，一旦遇到await就会先返回，等到异步操作完成再接着执行函数体内后面的语句。async函数内部的异步操作执行完，才会执行then方法指定的回调函数。await命令后面是一个promise对象，如果不是，会被立即转换成resolve的promise对象。await后面的promise变成reject后，async函数会中断，没有执行的函数也不会继续执行，为解决该问题可以采用try...catch方式
   7. 如何实现浅拷贝和深拷贝？  
     答：浅拷贝是拷贝原对象的引用；浅拷贝只是将对象的各个属性一次进行拷贝，不会进行递归拷贝
+
       ````javascript
         function shallowCopy(source) {
           var targetObj = source.constructor === Array ? [] : {}
@@ -325,6 +341,7 @@
         }
       ````
       深拷贝是拷贝出一个新的实例，新实例和之前的实例互不影响。深拷贝不仅将各个对象的属性拷贝出来，而且会递归拷贝各个属性所包含的对象。  
+
       ````javascript
         function deepCopy(source) {
           var targetObj = source.constructor === Array ? [] : {}
@@ -346,25 +363,28 @@
       ````
   8. [如何实现数组去重？](https://github.com/mqyqingfeng/Blog/issues/27)  
     答：
-     - 第一种原始方法：对原数组进行遍历，并在新数组中遍历是否含有，含有就不添加不含有就添加
-     ````javascript
-        function unique(arr) {
-          var res = [];
-          for (var i = 0; i < arr.length; i++) {
-            for (var j = 0; j < res.length; j++) {
-              if (arr[i] === res[j]) {
-                break;
+     - 第一种原始方法：对原数组进行遍历，并在新数组中遍历是否含有，含有就不添加不含有就添加  
+
+      ````javascript
+          function unique(arr) {
+            var res = [];
+            for (var i = 0; i < arr.length; i++) {
+              for (var j = 0; j < res.length; j++) {
+                if (arr[i] === res[j]) {
+                  break;
+                }
+              }
+              if (j === res.length) {
+                <!-- 说明res还没有arr[i] -->
+                res.push(arr[i])
               }
             }
-            if (j === res.length) {
-              <!-- 说明res还没有arr[i] -->
-              res.push(arr[i])
-            }
+            return res
           }
-          return res
-        }
-     ````
+      ````
+
      - indexOf方法
+
       ````javascript
         function unique(arr) {
           var res = [];
@@ -393,12 +413,14 @@
         }
       ````
       - filter方法(推荐)
+
       ````javascript
         function unique(arr) {
           return arr.filter((item, index, array) => array.indexOf(item) === index)
         }
       ````
       - es6方法
+
       ````javascript
         es6数据结构Set类似于数组，但成员唯一，没有重复值。
         function unique(arr) {
@@ -414,117 +436,132 @@
         }
       ````
 
-    为数组设计一个distinct方法  
-    如：[1,2,3,1,'2'].distinct() = [1,2,3,'2'],请提供几种思路，至少写一个
-    Array.prototype.distinct = function() { //这里不适合用箭头函数，不然this指向window
-      let arr = this;
-      return arr.filter((item, index, arr) => arr.indexOf(item) === index)
-    }
+      为数组设计一个distinct方法  
+      如：[1,2,3,1,'2'].distinct() = [1,2,3,'2'],请提供几种思路，至少写一个  
+
+      ````javascript
+      Array.prototype.distinct = function() { //这里不适合用箭头函数，不然this指向window
+        let arr = this;
+        return arr.filter((item, index, arr) => arr.indexOf(item) === index)
+      }
+      ````
+
   9. 如何用正则实现 string.trim() ？  
     答：String.prototype.trim = () => this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/, '');
+
   10. prototype和__proto__的关系是什么？    
     答：prototype只有构造函数才有该属性，后天赋于的。  
     proto/[[prototype]]是任何对象都有的，是私有的，天生自带的; 
-    __proto__是js的非标准但浏览器支持的属性。链关系的查找通过__proto__方式，如：obj.__proto__.__proto__
-    <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/prototype.png" alt="GitHub" title="prototype" width="400" height="100" />
+    __proto__是js的非标准但浏览器支持的属性。链关系的查找通过__proto__方式，如：obj.__proto__.__proto__  
+
+        <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/prototype.png" alt="GitHub" title="prototype" width="400" height="100" />
   11. JS 如何实现继承？  
     答：  
       - 类继承  
-      ````javascript
-        var obj = { a: 1}
-        var myObj = Object.create(obj)
-        myObj.a    // 1
-      ````  
-      - 构造器继承  
-      ````javascript
-      var Foo = function() {
-        this.str = 'foo';
-      }
-      Foo.prototype = {
-        get: function() {
-          return this.str
-        },
-        set: function(val) {
-          this.str= val
+
+        ````javascript
+          var obj = { a: 1}
+          var myObj = Object.create(obj)
+          myObj.a    // 1
+        ````  
+      - 构造器继承 
+
+        ````javascript
+        var Foo = function() {
+          this.str = 'foo';
         }
-      }
-      var bar = new Foo();
-      bar.str // foo
-      ```` 
+        Foo.prototype = {
+          get: function() {
+            return this.str
+          },
+          set: function(val) {
+            this.str= val
+          }
+        }
+        var bar = new Foo();
+        bar.str // foo
+        ```` 
+
       - [原型继承](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014344997013405abfb7f0e1904a04ba6898a384b1e925000)  
-      ````javascript
-        function Foo(name) {
-          this.name = name
-        }
-        Foo.prototype.myName = function() {
-          return this.name
-        }
-        function Bar(name, label) {
-          Foo.call(this,name) 
-          this.label = label
-        }
-        Bar.prototype = Object.create(Foo.prototype);
-        Bar.prototype.constructor = Bar;
-        Bar.prototype.myLabel = function() {
-          return this.label
-        }
-        var test = new Bar('helloName', 'helloLabel');
-        test.myLabel();  // hellloLabel
-        test.myName();  // hellloName
-      ````
+
+        ````javascript
+          function Foo(name) {
+            this.name = name
+          }
+          Foo.prototype.myName = function() {
+            return this.name
+          }
+          function Bar(name, label) {
+            Foo.call(this,name) 
+            this.label = label
+          }
+          Bar.prototype = Object.create(Foo.prototype);
+          Bar.prototype.constructor = Bar;
+          Bar.prototype.myLabel = function() {
+            return this.label
+          }
+          var test = new Bar('helloName', 'helloLabel');
+          test.myLabel();  // hellloLabel
+          test.myName();  // hellloName
+        ````
+
       - Mixin  
-      ````javascript
-        function Mixin(sourceObj, targetObj) {
-          for (var key in sourceObj) {
-            if (!targetObj[key]) {
-              targetObj[key] = sourceObj[key]
+
+        ````javascript
+          function Mixin(sourceObj, targetObj) {
+            for (var key in sourceObj) {
+              if (!targetObj[key]) {
+                targetObj[key] = sourceObj[key]
+              }
+            }
+            return targetObj
+          }
+        ````
+
+      - 寄生继承  
+
+        ````javascript
+          function Vehicle() {
+            this.engines = 1
+          }
+          Vehicle.prototype = {
+            ignition: function() {
+              console.info('turning on my engine')
+            },
+            drive: function() {
+              this.ignition();
+              console.info('steering and moving forward')
             }
           }
-          return targetObj
-        }
-      ````
-      - 寄生继承    
-      ````javascript
-        function Vehicle() {
-          this.engines = 1
-        }
-        Vehicle.prototype = {
-          ignition: function() {
-            console.info('turning on my engine')
-          },
-          drive: function() {
-            this.ignition();
-            console.info('steering and moving forward')
+          /*寄生类*/
+          function Car() {
+            var car = new Vehicle();
+            car.wheels = 4;
+            var vehDrive = car.drive;
+            car.drive = function () {
+              vehDrive.call(this);
+              console.info('car drive')
+            }
+            return car
           }
-        }
-        /*寄生类*/
-        function Car() {
-          var car = new Vehicle();
-          car.wheels = 4;
-          var vehDrive = car.drive;
-          car.drive = function () {
-            vehDrive.call(this);
-            console.info('car drive')
-          }
-          return car
-        }
 
-        var myCar = new Car();
-      ````
+          var myCar = new Car();
+        ````
       - es6的class方式  
-      ````javascript
-        class A {
-          constructor(str) {
-            this.str = str;
-          }
-        }
 
-        class B extends A {
-          constructor(str) {
-            super(str)
+        ````javascript
+          class A {
+            constructor(str) {
+              this.str = str;
+            }
           }
-        }
-      ````
+
+          class B extends A {
+            constructor(str) {
+              super(str)
+            }
+          }
+        ````
       - call和apply修改this指向的继承
 
   12. 至少 3 种强制类型转换和 2 种隐式类型转换?    
@@ -540,92 +577,113 @@
          - 字符串和布尔比较时，两者转数字
   13. new操作符做了什么？  
     答：   
-    a. 创建一个新的对象 
-    b. 这个新对象会执行[[prototype]]/__proto__链接 
-    c. 这个新对象会绑定到函数，调用this 
-    d. 如果函数没有返回其它对象，那么new表达式中的函数调用会自动绑定这个新对象
+    a. 创建一个新的对象  
+    b. 这个新对象会执行[[prototype]]/__proto__链接  
+    c. 这个新对象会绑定到函数，调用this  
+    d. 如果函数没有返回其它对象，那么new表达式中的函数调用会自动绑定这个新对象  
   14. null和undefined的区别？如何判断为NaN数据？  
     答：null是一个表示“无”的对象，转为数值时为0, typeof null输出“object”  
         (1) 作为函数的参数，表示该函数的参数是对象  
         (2) 作为对象原型链的终点  
         - - -
-     undefined是一个表示“无”的原始值，转化数值为NaN, typeof undefined输出"undefined"  
-        (1) 变量声明了，但没有赋值，等于undefined
-        (2) 调用函数时，应该提供的参数没有提供，该参数等于undeined;
-        (3) 对象没有赋值的属性，该属性的值为undefined  
-        (4) 函数没有返回值时，默认返回undefined
 
-    当算术运算返回一个未定义或无法表示的值时，NaN就产生了。NaN的值表示不是一个数字(Not a number),typeof NaN 输出“number”,判断NaN方法
-      (1)Number.isNaN()或者isNaN
-      (2)如果isNaN函数的参数不是Number类型，isNaN会先尝试将参数转换为数值再判断  
-  ````javascript
-    var isNaN = function(value) {
-      var n = parseInt(value);
-      return n !== n
-    }
-  ````  
-            (3)和全局isNaN相比，Number.isNaN不会进行强制转换
-````javascript
-Number.isNaN = Number.isNaN || function(value) {
-  return typeof value === "number" && isNaN(value)
-}
-````
+      undefined是一个表示“无”的原始值，转化数值为NaN, typeof undefined输出"undefined"  
+          (1) 变量声明了，但没有赋值，等于undefined  
+          (2) 调用函数时，应该提供的参数没有提供，该参数等于undeined;  
+          (3) 对象没有赋值的属性，该属性的值为undefined  
+          (4) 函数没有返回值时，默认返回undefined  
+
+      当算术运算返回一个未定义或无法表示的值时，NaN就产生了。NaN的值表示不是一个数字(Not a number),typeof NaN 输出“number”,判断NaN方法
+        (1)Number.isNaN()或者isNaN  
+        (2)如果isNaN函数的参数不是Number类型，isNaN会先尝试将参数转换为数值再判断  
+
+        ````javascript
+          var isNaN = function(value) {
+            var n = parseInt(value);
+            return n !== n
+          }
+        ````
+        (3)和全局isNaN相比，Number.isNaN不会进行强制转换
+        ````javascript
+        Number.isNaN = Number.isNaN || function(value) {
+          return typeof value === "number" && isNaN(value)
+        }
+        ````
       
   15. call() 和 apply() 的区别和作用， bind？  
-    答：call和apply用来调用函数，call参数一个一个传入，apply参数是以数组方式。都属于立即执行。  
-      call和apply作用是改变this指向。
+    答：call和apply用来调用函数，call参数一个一个传入，apply参数是以数组方式。都属于立即执行。call和apply作用是改变this指向。  
       bind绑定后会生成新的函数，调用时才执行，并不会立即执行
   16. JavaScript 的 typeof 返回哪些数据类型?  
     答：typeof返回数据类型string、number、boolean、undefined、object、Symbol、Function
   17. [DOM 事件模型是什么？](http://javascript.ruanyifeng.com/dom/event.html)  
-    答：a: EventTarget接口的三个实例方法：  
+    答：a: EventTarget接口的三个实例方法： 
+
         - addEventListener: 绑定事件的监听函数，可以添加多个监听函数，能指定是在捕获还是冒泡阶段触发监听函数
         - removeEventListener: 移除事件的监听函数  
-        - dispatchEvent: 触发事件  
+        - dispatchEvent: 触发事件 
+
         b: HTML的on-属性（只在冒泡阶段触发，违反了HTML与javascript代码分离的原则，写在一起不利于代码分工）   
-        c: 元素节点的事件属性，如div.onclick;也只在冒泡阶段触发，同一事件只能定义一个监听函数，定义多个时，后一个会覆盖前一个； onclick > on-属性
+        c: 元素节点的事件属性，如div.onclick;也只在冒泡阶段触发，同一事件只能定义一个监听函数，定义多个时，后一个会覆盖前一个； div.onclick > on-属性
         d: 事件的传播:
+
         - 第一阶段: 从window对象传导到目标节点（上层传到底层）, 称为"捕获阶段"
         - 第二阶段: 在目标节点上触发，称为"目标阶段"
         - 第三阶段：从目标节点传导回window对象（底层传回到上层）,称为"冒泡阶段"
+
   18. [事件委托是什么？有什么好处？](https://zhuanlan.zhihu.com/p/26536815)  
     答：事件委托就是把一个元素相应事件的函数委托到另一个元素；一般来讲，把一个或一组元素的事件绑定到它的父层或更外层上面，真正绑定事件是在外层，当事件触发该元素上，通过冒泡触发它的外层元素，从而执行函数。  
     好处： 减少内存消耗，减少重复工作  
   19. 箭头函数考点
-    ····javascript
-    a => a
-    a => {a}
-    a => ({a})
-    a => ({[a]: a})
-    ····
-  20. 'b' + 'a' ++'a' +'a' 
-  21. [0] == '0'以及[] == 0
+
+      ````javascript
+      a => a // 返回a的值
+      a => {a} // 返回undefined
+      a => ({a}) // 返回对象，{a: a的值}
+      a => ({[a]: a}) // 返回对象， {a的值： a的值}
+      ````
+
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/array-return.png" alt="GitHub" title="border-box" width="200" height="200" />  
+  20. 'b' + 'a' + +'a' +'a'   // "baNaNa"   
+      a. 考察+ '字符串'能隐式将字符串转数字类型  
+      b. 将字符串转数字过程中，如果是数字类型会直接转换成数字，否则为NaN
+  21. [0] == '0'  // true  
+      [] == 0  // true  
+      [] == []  // false  引用对象不一致  
+      [] != []  // true 
+      [] == {}  // false  引用对象不一致
   22.  
 
-  ····html
+  ````html
   <div id="d">
     <div id="a"></div>
     <div id="b"></div>
     <div id="c"></div>
   </div>
-  ····
-  ....javascript
+  ````
+
+  ````javascript
   var a = [
     document.getElementById('a'),
     document.getElementById('b'),
     document.getElementById('c'),
   ];
   var b = document.getElementById('d').getElementByTagName('div')
-  ....
-  请问a, b有什么异同？    
-  .   
+  ````
+  请问a, b有什么异同？  
+  答： a是数组; b是HTMLCollection,是一种伪数组   
+
   23. 实现空格分隔字符串
-  如： 'Hello'.specify() = 'H e l l o'
-    String.prototype.specify = function() {
-      let string = this;
-      return string.split('').join(' ')
-    }
+  如： 'Hello'.specify() = 'H e l l o'  
+  
+      ````javascript
+        String.prototype.specify = function() {
+          let string = this;
+          return string.split('').join(' ')
+        }
+      ````
+
   24. 
+  ````javascript
   function A() {
 
   }
@@ -638,32 +696,50 @@ Number.isNaN = Number.isNaN || function(value) {
   B.prototype.a = 1;
   console.info(new A().a) // 输出1
   console.info(new B().a) // 输出 undefined
-  因为首先查找自身属性是否含有a,有就取值自己的（B含有，且为undefined）,否则，通过原型链查找原型链上的。
-25. [数组](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)和[字符串](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)操作方法？ 
-26. 'b' + 'a' + +'a' +'a'  ——》 ‘baNaNa’
+  ````
+  考察的点： new对象时，构造函数初始化是否传值；原型链查找值，先从自身找起。  
+  因为首先查找自身属性是否含有a,有就取值自己的（B含有，且为undefined）,否则，通过原型链查找原型链上的。  
+25. [数组](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)和[字符串](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)操作方法？  
+26. 伪数组定义以及如何转数组？  
+答：
+  **定义** 
+
+  - 伪数组是一个对象  
+  - 伪数组必须含有length属性  
+  - 如果length不为0，这数据结构必须按照下标存储  
+
+  **判断是否为真数组**
+
+  - arr instanceof Array 
+  - Object.prototype.toString.call(arr) === '[object Array]'  
+
+  **转真数组** 
+  - Array.prototype.slice.call(arr)  
+27. [原型的理解](https://zhuanlan.zhihu.com/p/30004089)  
 
 ## HTTP
   1. HTTP 状态码知道哪些？  
 
-  | 状态码        | 相应类别           | 原因短语  |
-  | ------------- |--------------| --------|
-  | 1XX      | 信息性状态码 | 服务器正在处理请求 |
-  | 2XX      | 成功状态码      |   请求已正常处理完毕 |
-  | 3XX | 重定向状态码      |    需要进行额外操作以完成请求 |
-  | 4XX | 客户端错误状态码      |    客户端原因导致服务器无法处理请求 |
-  | 5XX | 服务器错误状态码      |    服务器原因导致处理请求出错 |
-  2. 301 和 302 的区别是什么？
-  3. HTTP 缓存怎么做？
+   状态码        | 相应类别           | 原因短语  
+   ------------- |--------------| --------
+   1XX      | 信息性状态码 | 服务器正在处理请求 
+   2XX      | 成功状态码      |   请求已正常处理完毕 
+   3XX | 重定向状态码      |    需要进行额外操作以完成请求 
+   4XX | 客户端错误状态码      |    客户端原因导致服务器无法处理请求 
+   5XX | 服务器错误状态码      |    服务器原因导致处理请求出错 
+  2. 301 和 302 的区别是什么？  
+    答：301适合永久重定向，302是临时重定向  
+  3. [HTTP 缓存怎么做？](http://mp.weixin.qq.com/s?srcid=04270LewQDCrOr1hW9vh5gHL&scene=23&mid=2651228395&sn=dcf7e3bd518f1e189ce17eaed94c27bb&idx=1&__biz=MjM5MTA1MjAxMQ%3D%3D&chksm=bd49516f8a3ed879221bf28bf68ac00c4733a6048c54ea90e75a9e2315a262c2d66fb29a4a34&mpshare=1#rd&appinstall=0)  
   4. [Cache-Control 和 Etag 的区别是什么？](https://github.com/rccoder/blog/issues/12)  
     答：带条件的缓存方式Etag和last-modified, 分别对应request-headers下的if-none-match和if-modified-since,如果本地有相关资源的缓存，并且缓存的response headers下有etag或last-modified的情况，这时候去请求服务器，它就是带有条件的get。服务器接到带有该条件的请求，去判断缓存的资源是否是最新的，如果是最新的返回304,否则返回200。  
     另一个对上述的优化是在response headers里加Cache-Control: max-age=*****或expires:,两个若同时存在，则CaChe-Control优先级大于expires，这两个会在服务器请求之前。
   5. Cookie 是什么？Session 是什么？localstorage是什么？
 
-  | 特性 | Cookie | localStorage | sessionStorage |
-  | -----------| ----------- | ----------- | ----------- |
-  | 数据的生命周期 | 关闭浏览器后失效 | 除非被清除， 否则永久保存 | 当前会话有效，关闭浏览器清除 |
-  | 存放大小 | 4k左右 | 5M | 5M |
-  | 与服务器通信 | 每次会携带在HTTP头中，cookie保存过多数据会带来性能问题 | 仅在客户端中，不参与服务器通信 | 仅在客户端中，不参与服务器通信 |
+      特性      |    Cookie     |     localStorage        | sessionStorage    
+      ---------------------| ----------- | ----------- | ----------- 
+      数据的生命周期 | 关闭浏览器后失效 | 除非被清除， 否则永久保存 | 当前会话有效，关闭浏览器清除 
+      存放大小 | 4k左右 | 5M | 5M 
+      与服务器通信 | 每次会携带在HTTP头中，cookie保存过多数据会带来性能问题 | 仅在客户端中，不参与服务器通信 | 仅在客户端中，不参与服务器通信 
   6. 同步和异步的区别?  
     答： 同步是实时处理，异步是分时处理。同步往往会阻塞，没数据过来就等着；异步不会阻塞，没数据来时可以做其它事，有数据了再去处理。同步一定程度上可以看成单线程，异步可以看做多线程
   7. GET 和 POST 的区别是什么？
@@ -671,14 +747,14 @@ Number.isNaN = Number.isNaN || function(value) {
     答： 跨域是只要协议、域名、端口有任何一个不同，都被当做是不同的域。    
          CORS(Cross-Origin Resource Sharing)跨域资源共享：定义了必须在访问开宇资源时，浏览器与服务器应该如何沟通， 基本思想是使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或相应是应该成功还是失败。  
          JSONP方式是将返回的数据包含在回调函数中使用，例如：  
-  <code>
-    <script type="text/javascript">
-      function dosomething(jsondata){
-          /*处理获得的json数据*/
-      }
-    </script>
-    <script src="http://example.com/data.php?callback=dosomething"></script>
-  </code>
+        ````javascript
+          <script type="text/javascript">
+            function dosomething(jsondata){
+                /*处理获得的json数据*/
+            }
+          </script>
+          <script src="http://example.com/data.php?callback=dosomething"></script>
+       ````
 
   JSONP的优点是不想ajax的XMLHttpRequest那样受同源策略的限制，兼容性更好，古老的浏览器也能使用，缺点是只能进行get方式，post不支持。  
   window.postMessage(message, targetOrigin)方法是html5新引入的特性，可以使用它来向其它window对象发送消息。
@@ -687,11 +763,12 @@ Number.isNaN = Number.isNaN || function(value) {
   11. 浏览器的hash和history两种路由机制？
    hash是带#号的，浏览器发送url请求时，#后面的不会发送给服务端。#用于浏览器滚动到#后面值的位置。
    histroy更美观，每次输入都会发送请求，而且未找到资源会发出404错误。
-  12. [原型的理解](http://www.cnblogs.com/changyangzhe/articles/5702241.html)
+  12. token
 
 ## WEBPACK
   1. [转译出的文件过大怎么办？](https://www.jianshu.com/p/367dc422393f)   
-    答： a: 代码压缩：UglifyJsPlugin,使用这个会使编译速度变慢，一般在生成环境启用。  
+    答：  
+     a: 代码压缩：UglifyJsPlugin,使用这个会使编译速度变慢，一般在生成环境启用。  
         b: 代码分割：
         ````javascript
         output: {
