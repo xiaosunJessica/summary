@@ -96,10 +96,10 @@
       box-sizing的常用属性：  
       - content-box是默认属性，width和height只是内容的宽和高，并不包括padding、border、margin。上面展示的child实际渲染的宽高为260 * 160
 
-      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/content-box.png" alt="GitHub" title="content-box" width="200" height="200" />
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/content-box.png" alt="GitHub" title="content-box" width="200" height="200" />
 
       - border-box, width和height包含了padding和border,但不不含margin。上面展示的child实际渲染的宽高为220 * 120,多了margin的宽高  
-      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/border-box.png" alt="GitHub" title="border-box" width="200" height="200" />
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/border-box.png" alt="GitHub" title="border-box" width="200" height="200" />
       
   2. 如何居中  
      **水平居中**
@@ -227,11 +227,12 @@
   - 样式排除法
   - 检查是否清除浮动
   - IE是否触发haslayout  
-  10. [父容器width和height分别为200 * 100， 子元素设置margin:50%时](http://blog.doyoe.com/2013/11/30/css/margin%E7%B3%BB%E5%88%97%E4%B9%8B%E7%99%BE%E5%88%86%E6%AF%94/)（考点包括margin百分比都是针对宽度，内联的上下都不起作用）
+  10. [父容器width和height分别为200 * 100， 子元素设置margin:50%时](http://blog.doyoe.com/2013/11/30/css/margin%E7%B3%BB%E5%88%97%E4%B9%8B%E7%99%BE%E5%88%86%E6%AF%94/)（考点包括margin百分比都是针对宽度，内联的上下都不起作用）  
+  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/margin-percent.png" alt="GitHub" title="border-box" width="200" height="200" />
   11. css手写checkbox(完全不用js)
   12. AB里面的容器不等高，如何做到使两个背景等高？
-  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/AB1.png" alt="GitHub" title="border-box" width="200" height="200" />
-  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/AB2.png" alt="GitHub" title="border-box" width="200" height="200" />  
+  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB1.png" alt="GitHub" title="border-box" width="200" height="200" />
+  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB2.png" alt="GitHub" title="border-box" width="200" height="200" />  
   13. position的理解  
 
      取值 | 描述  
@@ -425,7 +426,7 @@
     答：prototype只有构造函数才有该属性，后天赋于的。  
     proto/[[prototype]]是任何对象都有的，是私有的，天生自带的; 
     __proto__是js的非标准但浏览器支持的属性。链关系的查找通过__proto__方式，如：obj.__proto__.__proto__
-    <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/prototype.png" alt="GitHub" title="prototype" width="400" height="100" />
+    <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/prototype.png" alt="GitHub" title="prototype" width="400" height="100" />
   11. JS 如何实现继承？  
     答：  
       - 类继承  
