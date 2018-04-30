@@ -66,7 +66,12 @@
   ------------- | ---------------- | -------------- 
   盒模型 | width=元素内容宽度(content-box) | width=width + padding + border(box-sizing: border-box)
   百分比/行内高度 | 给span设置宽高不生效；块级元素的父元素没有高度，子元素的百分比高度无效 | 有效
-  margin: auto | 水平居中有效 | 无效，可用text-align解决
+  margin: auto | 水平居中有效 | 无效，可用text-align解决  
+
+  6. [用户访问页面到最终渲染的整个过程？](https://juejin.im/entry/59e1d31f51882578c3411c77)  
+    用户输入url,浏览器向服务器发送请求，获取html,然后进入HTML渲染机制。首先，根据HTML生成DOM树；其次，根据css和js重排页面  
+  7. 你对页面进行性能优化的思路和思想是什么？  
+  答： 减少http请求; 减少DOM操作，避免不必要的重绘和重排;压缩文件体积；采用CDN；  
 
 ## CSS
   1. 说说盒模型？ box-sizing常用的属性有哪些？分别有什么作用？   
@@ -228,33 +233,31 @@
       - 样式排除法
       - 检查是否清除浮动
       - IE是否触发haslayout  
-  10. [父容器width和height分别为200 * 100， 子元素设置margin:50%时](http://blog.doyoe.com/2013/11/30/css/margin%E7%B3%BB%E5%88%97%E4%B9%8B%E7%99%BE%E5%88%86%E6%AF%94/)（考点包括margin百分比都是针对宽度，内联的上下都不起作用）
+  10. [父容器width和height分别为200 * 100， 子元素设置margin:50%时](http://blog.doyoe.com/2013/11/30/css/margin%E7%B3%BB%E5%88%97%E4%B9%8B%E7%99%BE%E5%88%86%E6%AF%94/)（考点包括margin百分比都是针对宽度，内联的上下都不起作用）  
   a. 子元素的margin的百分比针对于父元素的Width  
   b. 子元素margin:50%时，左右margin为100px,加自身的width超出了父元素宽度的范围，此时后面的元素会换行。因此，图中的'2222'虽然是inline-block方式，也在下一行。除非前一个margin的左右百分比之和小于50%,才会展示在一排  
   c. 图中可以看出，子元素margin-top也是50%,所以父元素没有全包子元素，如果希望父元素全包子元素，可以通过在父元素添加overflow: scroll破坏BFC  
-  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/margin-percent.png" alt="GitHub" title="border-box" width="200" height="200" />
-  11. [使用css重新定义checkbox]  (https://github.com/xiaosunJessica/interview/blob/master/html/css-checkbox.html)   
+  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/margin-percent.png" alt="GitHub" title="border-box" width="200" height="400" />
+  11. [使用css重新定义checkbox](https://github.com/xiaosunJessica/interview/blob/master/html/css-checkbox.html)   
     a. 结合input[type='checkbox']和label  
     b. input[type='checkbox']隐藏掉, label添加伪元素放在input位置处  
     c. input状态为checked时，将label的伪元素content进行修改
   12. AB里面的容器不等高，如何做到使两个背景等高？  
     a. 通过flex方式，让父元素display: flex;  
-      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB2.png" alt="GitHub" title="border-box" width="200" height="200" />  
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB2.png" alt="GitHub" title="border-box" width="200" height="300" />  
     b. 通过position方式，例如：左侧高度固定，父元素position: relatvie; 右侧position: absolute; top: 0; bottom;  
-     <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB1.png" alt="GitHub" title="border-box" width="200" height="200" />  
-    c. 父元素display: table; 两个子元素display: table-cell.
-      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB3.png" alt="GitHub" title="border-box" width="200" height="200" /> .
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB1.png" alt="GitHub" title="border-box" width="200" height="300" />  
+    c. 父元素display: table; 两个子元素display: table-cell.  
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB3.png" alt="GitHub" title="border-box" width="200" height="300" /> 
 
   13. position的理解  
 
-     取值 | 描述  
-    -------| ---------  
-    static | 正常布局，top、bottom、left、right、z-index不起作用 
-    relatvie | 会留空白，放在正常位置上  
-    absolute | 脱离文档，不留空白，相对于非static的祖先元素定位 
-    fixed | 脱离文档，不留空白，相对于屏幕视口的位置定位  
-
-
+      取值 | 描述  
+      -------| ---------  
+      static | 正常布局，top、bottom、left、right、z-index不起作用 
+      relatvie | 会留空白，放在正常位置上  
+      absolute | 脱离文档，不留空白，相对于非static的祖先元素定位 
+      fixed | 脱离文档，不留空白，相对于屏幕视口的位置定位  
 
 ## JS
   1. JS 有哪些数据类型？  
@@ -454,7 +457,7 @@
     proto/[[prototype]]是任何对象都有的，是私有的，天生自带的; 
     __proto__是js的非标准但浏览器支持的属性。链关系的查找通过__proto__方式，如：obj.__proto__.__proto__  
 
-        <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/prototype.png" alt="GitHub" title="prototype" width="400" height="100" />
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/prototype.png" alt="GitHub" title="prototype" width="400" height="100" />
   11. JS 如何实现继承？  
     答：  
       - 类继承  
@@ -739,10 +742,13 @@
       ---------------------| ----------- | ----------- | ----------- 
       数据的生命周期 | 关闭浏览器后失效 | 除非被清除， 否则永久保存 | 当前会话有效，关闭浏览器清除 
       存放大小 | 4k左右 | 5M | 5M 
-      与服务器通信 | 每次会携带在HTTP头中，cookie保存过多数据会带来性能问题 | 仅在客户端中，不参与服务器通信 | 仅在客户端中，不参与服务器通信 
+      与服务器通信 | 每次会携带在HTTP头中，cookie保存过多数据会带来性能问题 | 仅在客户端中，不参与服务器通信 | 仅在客户端中，不参与服务器通信   
+
+      注意： localstorage只能存储字符串类型，如果需要存储对象，首先需要转换为字符串（JSON.stringify）。将字符串对象转换为字符串采用JSON.parse
   6. 同步和异步的区别?  
     答： 同步是实时处理，异步是分时处理。同步往往会阻塞，没数据过来就等着；异步不会阻塞，没数据来时可以做其它事，有数据了再去处理。同步一定程度上可以看成单线程，异步可以看做多线程
-  7. GET 和 POST 的区别是什么？
+  7. GET 和 POST 的区别是什么？  
+      GET用于请求数据，POST用于数据提交。GET方式体现在url上，会有长度限制，且不够安全。POST没长度限制，安全性也相对高点。  
   8. 怎么跨域？JSONP 是什么？CORS 是什么？postMessage 是什么？  
     答： 跨域是只要协议、域名、端口有任何一个不同，都被当做是不同的域。    
          CORS(Cross-Origin Resource Sharing)跨域资源共享：定义了必须在访问开宇资源时，浏览器与服务器应该如何沟通， 基本思想是使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或相应是应该成功还是失败。  
@@ -758,8 +764,8 @@
 
   JSONP的优点是不想ajax的XMLHttpRequest那样受同源策略的限制，兼容性更好，古老的浏览器也能使用，缺点是只能进行get方式，post不支持。  
   window.postMessage(message, targetOrigin)方法是html5新引入的特性，可以使用它来向其它window对象发送消息。
-  9. http 2.0对于http 1.x有哪些优点？
-  10. XML和JSON的区别？
+  9. [http 2.0对于http 1.x有哪些优点？](https://www.cnblogs.com/frankyou/p/6145485.html)  
+  10. [XML和JSON的区别？](https://www.cnblogs.com/gslblog/p/6664641.html)  
   11. 浏览器的hash和history两种路由机制？
    hash是带#号的，浏览器发送url请求时，#后面的不会发送给服务端。#用于浏览器滚动到#后面值的位置。
    histroy更美观，每次输入都会发送请求，而且未找到资源会发出404错误。
@@ -793,28 +799,34 @@
     c: 提取公共代码， 使用CommonsChunkPlugin提取公共模块，可减少文件体积，有助于浏览器的文件缓存
     d: 优化搜索路径，exclude的配置避免多余文件的查找
   3. 写过 webpack loader 吗？
-  4. loader与plugin区别？
+  4. loader与plugin区别？  
+    答： loader是一个转换器，作用于文件，主要用于将一个文件转换成另一文件类型，例如*.less使用less-loader转换为*.css。  
+    plugin是一个扩展器，作用于webpack。
 
 ## React
   1. 你对 react 有什么理解？基于 react 的开发模式比起传统 jqurey 开发模式的最大优势(可以有几个)是什么？
   答： 理解： 通过Virtual DOM和Diff算法隔离DOM操作；采用单项数据流，可跟踪；组件化，JSX自定义标签，便于抽象化。
   优点：react无需直接操作DOM，事件通过改变state间接操作DOM
-  2. 你对异步模型有哪些理解？
-  3. 前后端分离的原理及意义？
-  答：原理：后端提供接口，前端获取数组呈现.
-  意义： 前后端解耦，同步开发，提高效率。
-  4. 你对页面进行性能优化的思路和思想是什么？答： 减少http请求，减少DOM操作，避免不必要的重绘和重排l;压缩文件体积；采用CDN；
-  5. react在setState后发生了什么（直接说了setState源码）
+  2. react在setState后发生了什么（直接说了setState源码）  
   当this.setState调用后，新的State没有立即生效，而是通过ReactUpdate.batchedUpdate存入临时的队列中。当一个transaction完成后，才通过ReactUpdate.flushBatchedUpdates将所有临时state merge并计算新的props和state
   [思维发散问题](https://juejin.im/post/59a699fd6fb9a0247d4f5970
-  )
-  6. flux解释
-  8. 对react有什么了解（直接说了react中虚拟dom内部表示，mount过程源码和同步过程源码）
-  9. combineReduces
+  )  
+  3. flux解释
+  4. 对react有什么了解（直接说了react中虚拟dom内部表示，mount过程源码和同步过程源码）
+  5. combineReduces
 
 ## es6和es7的理解
-[es6](http://www.cnblogs.com/changyangzhe/articles/5702241.html)
+[es6](http://www.cnblogs.com/changyangzhe/articles/5702241.html)  
+es7的装饰器、async/await  
 ## 各个模块化的了解
 
 ## git
-  rebase和merge区别
+  [rebase和merge区别](https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E5%8F%98%E5%9F%BA)  
+  答： rebase是回到两个分支的共同祖先，根据当前分支，生成一系列文件补丁，然后以基底分支最后一个提交对象为新的起点，逐个应用补丁，最后生成一个新的提交对象。 (重复提交) 
+  merge是将两个分支快照和共同祖先进行三方合并。
+
+##front-end  
+  1. 你对异步模型有哪些理解？
+  2. 前后端分离的原理及意义？
+  答：原理：后端提供接口，前端获取数组呈现.
+  意义： 前后端解耦，同步开发，提高效率。
