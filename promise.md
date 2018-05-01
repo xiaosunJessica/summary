@@ -21,19 +21,20 @@
   function request(method, url, async, data) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHTTPRequest();
+      xhr.onreadystatechange = () => {
+        if (request.readyState === 4) {
+          if (request.status === 200) {
+            resolve(request.responseText);
+          } else {
+            reject(request.status);
+          }
+        }
+      }
       xhr.open(method, url, async) 
       if (data && (method && method.toLowerCase()) === 'post') {
         xhr.send(data)
       } else {
         xhr.send()
-      }
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState == 4) {
-          if (xhr.status >= 200 && xhr.status < 300)
-          resolve()
-        } else {
-          reject()
-        }
       }
     })
   }

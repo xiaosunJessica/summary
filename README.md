@@ -720,7 +720,28 @@
 
   **转真数组** 
   - Array.prototype.slice.call(arr)  
-27. [原型的理解](https://github.com/xiaosunJessica/interview/blob/master/prototype.md)  
+27. [原型的理解](https://github.com/xiaosunJessica/interview/blob/master/prototype.md) 
+28. [数组降维](http://es6.ruanyifeng.com/#docs/generator)  
+  ````javascript
+  var arr = [1, [[2, 3], 4], [5, 6]];
+
+  var flat = function* (a) {
+    var length = a.length;
+    for (var i = 0; i < length; i++) {
+      var item = a[i];
+      if (typeof item !== 'number') {
+        yield* flat(item);
+      } else {
+        yield item;
+      }
+    }
+  };
+
+  for (var f of flat(arr)) {
+    console.log(f);
+  }
+  ````  
+  29. 什么情况下使用递归？
 
 ## HTTP
   1. HTTP 状态码知道哪些？  
@@ -818,8 +839,26 @@
   5. combineReduces
 
 ## es6和es7的理解
-[es6](http://www.cnblogs.com/changyangzhe/articles/5702241.html)  
-es7的装饰器、async/await  
+[es6](http://www.cnblogs.com/changyangzhe/articles/5702241.html)
+1. 迭代器（Iterator）与生成器（generator）  
+  - [迭代器](http://es6.ruanyifeng.com/#docs/iterator)  
+  作用有三个： 一是为各种数据结构提供统一的接口；二是使数据按照某种次序排列；三是使用for...of遍历。  
+  ````javascript  
+  function makeIterator(arrary) {
+    var nextIndex = 0;
+    return {
+      next: function() {
+        return nextIndex < array.length ? 
+        {value: array[nextIndex]} :
+        {done: true}
+      }
+    }
+  }
+  ````  
+  一个数据结构只要具有Symbol.iterator属性，就可以认为是“可遍历的”（iterable）
+  - [生成器](http://es6.ruanyifeng.com/#docs/generator)  
+  Generator是一个状态机。调用Generator函数后，该函数并不自信，返回的也不是函数运行结果，而是一个指向内部状态的指针对象，也就是迭代器对象
+2. es7的装饰器、async/await  
 ## 各个模块化的了解
 
 ## git
@@ -827,8 +866,8 @@ es7的装饰器、async/await
   答： rebase是回到两个分支的共同祖先，根据当前分支，生成一系列文件补丁，然后以基底分支最后一个提交对象为新的起点，逐个应用补丁，最后生成一个新的提交对象。 (重复提交) 
   merge是将两个分支快照和共同祖先进行三方合并。
 
-##front-end  
+## front-end  
   1. 你对异步模型有哪些理解？
-  2. 前后端分离的原理及意义？
-  答：原理：后端提供接口，前端获取数组呈现.
+  2. 前后端分离的原理及意义？  
+  答：原理：后端提供接口，前端获取数组呈现.  
   意义： 前后端解耦，同步开发，提高效率。
