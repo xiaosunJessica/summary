@@ -233,22 +233,24 @@
       - 样式排除法
       - 检查是否清除浮动
       - IE是否触发haslayout  
-  10. [父容器width和height分别为200 * 100， 子元素设置margin:50%时](http://blog.doyoe.com/2013/11/30/css/margin%E7%B3%BB%E5%88%97%E4%B9%8B%E7%99%BE%E5%88%86%E6%AF%94/)（考点包括margin百分比都是针对宽度，内联的上下都不起作用）  
+  10. [父容器width和height分别为200 * 100， 子元素设置margin:50%时](http://blog.doyoe.com/2013/11/30/css/margin%E7%B3%BB%E5%88%97%E4%B9%8B%E7%99%BE%E5%88%86%E6%AF%94/)  
+  （考点包括margin百分比都是针对宽度，内联的上下都不起作用）  
   a. 子元素的margin的百分比针对于父元素的Width  
   b. 子元素margin:50%时，左右margin为100px,加自身的width超出了父元素宽度的范围，此时后面的元素会换行。因此，图中的'2222'虽然是inline-block方式，也在下一行。除非前一个margin的左右百分比之和小于50%,才会展示在一排  
   c. 图中可以看出，子元素margin-top也是50%,所以父元素没有全包子元素，如果希望父元素全包子元素，可以通过在父元素添加overflow: scroll破坏BFC  
-  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/margin-percent.png" alt="GitHub" title="border-box" width="200" height="400" />
-  11. [使用css重新定义checkbox](https://github.com/xiaosunJessica/interview/blob/master/html/css-checkbox.html)   
+  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/margin-percent.png" alt="GitHub" title="border-box" width="300" height="300" />
+  11. [使用css重新定义checkbox](https://github.com/xiaosunJessica/interview/blob/master/html/css-checkbox.html)  
     a. 结合input[type='checkbox']和label  
     b. input[type='checkbox']隐藏掉, label添加伪元素放在input位置处  
     c. input状态为checked时，将label的伪元素content进行修改
+
   12. AB里面的容器不等高，如何做到使两个背景等高？  
     a. 通过flex方式，让父元素display: flex;  
-      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB2.png" alt="GitHub" title="border-box" width="200" height="300" />  
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB2.png" alt="GitHub" title="border-box" width="300" height="300" />  
     b. 通过position方式，例如：左侧高度固定，父元素position: relatvie; 右侧position: absolute; top: 0; bottom;  
-      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB1.png" alt="GitHub" title="border-box" width="200" height="300" />  
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB1.png" alt="GitHub" title="border-box" width="300" height="300" />  
     c. 父元素display: table; 两个子元素display: table-cell.  
-      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB3.png" alt="GitHub" title="border-box" width="200" height="300" /> 
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB3.png" alt="GitHub" title="border-box" width="300" height="300" /> 
 
   13. position的理解  
 
