@@ -720,7 +720,7 @@
 
   **转真数组** 
   - Array.prototype.slice.call(arr)  
-27. [原型的理解](https://zhuanlan.zhihu.com/p/30004089)  
+27. [原型的理解](https://github.com/xiaosunJessica/interview/blob/master/prototype.md)  
 
 ## HTTP
   1. HTTP 状态码知道哪些？  
@@ -734,7 +734,7 @@
    5XX | 服务器错误状态码      |    服务器原因导致处理请求出错 
   2. 301 和 302 的区别是什么？  
     答：301适合永久重定向，302是临时重定向  
-  3. [HTTP 缓存怎么做？](http://mp.weixin.qq.com/s?srcid=04270LewQDCrOr1hW9vh5gHL&scene=23&mid=2651228395&sn=dcf7e3bd518f1e189ce17eaed94c27bb&idx=1&__biz=MjM5MTA1MjAxMQ%3D%3D&chksm=bd49516f8a3ed879221bf28bf68ac00c4733a6048c54ea90e75a9e2315a262c2d66fb29a4a34&mpshare=1#rd&appinstall=0)  
+  3. [HTTP 缓存怎么做？](https://github.com/xiaosunJessica/interview/blob/master/cache.md)  
   4. [Cache-Control 和 Etag 的区别是什么？](https://github.com/rccoder/blog/issues/12)  
     答：带条件的缓存方式Etag和last-modified, 分别对应request-headers下的if-none-match和if-modified-since,如果本地有相关资源的缓存，并且缓存的response headers下有etag或last-modified的情况，这时候去请求服务器，它就是带有条件的get。服务器接到带有该条件的请求，去判断缓存的资源是否是最新的，如果是最新的返回304,否则返回200。  
     另一个对上述的优化是在response headers里加Cache-Control: max-age=*****或expires:,两个若同时存在，则CaChe-Control优先级大于expires，这两个会在服务器请求之前。

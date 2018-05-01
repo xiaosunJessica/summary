@@ -1,6 +1,7 @@
 # 缓存
   浏览器与服务器之间的通信方式是应答模式。    
   最初，进入浏览器，首次发起请求，此时，浏览器肯定是不会有缓存的。因此，其通信过程如下图所示
+
    <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/storage/storage1.png" alt="图1" title="图1" width="300" height="300" />
    在上图可以看出：
    - 浏览器每次发起请求，都会先在浏览器缓存中查找请求的结果及缓存标识  
@@ -9,12 +10,15 @@
 ## 不同情况下的缓存过程
 
   - 当从浏览器没有获取到缓存结果和缓存标识的情况，其情况同第一次发起http请求。如下图所示：
+
      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/storage/storage2.png" alt="图2" title="图2" width="300" height="300" />  
   
   - 当浏览器缓存存在缓存结果和缓存标识，但结果和标识失效的情况下，此时，使用协商缓存。如下图所示：
+
      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/storage/storage3.png" alt="图3" title="图3" width="300" height="300" />  
     
-  - 当强缓存有效，即浏览器缓存中的缓存结果和标识都存在且有效。此时，直接从浏览器缓存获取，不需要与服务器交互。如下图所示
+  - 当强缓存有效，即浏览器缓存中的缓存结果和标识都存在且有效。此时，直接从浏览器缓存获取，不需要与服务器交互。如下图所示： 
+  
      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/storage/storage3.png" alt="图3" title="图3" width="300" height="300" />  
   
   ## 强缓存
@@ -49,3 +53,6 @@
   
   ## 总结  
   强制缓存优于协商缓存，强制缓存是从浏览器缓存中获取的，协商缓存是带条件的，需要向服务器发起请求。
+
+  ## 参考链接
+  1. http://mp.weixin.qq.com/s?srcid=04270LewQDCrOr1hW9vh5gHL&scene=23&mid=2651228395&sn=dcf7e3bd518f1e189ce17eaed94c27bb&idx=1&__biz=MjM5MTA1MjAxMQ%3D%3D&chksm=bd49516f8a3ed879221bf28bf68ac00c4733a6048c54ea90e75a9e2315a262c2d66fb29a4a34&mpshare=1#rd&appinstall=0
