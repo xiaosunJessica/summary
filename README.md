@@ -857,7 +857,23 @@
   ````  
   一个数据结构只要具有Symbol.iterator属性，就可以认为是“可遍历的”（iterable）
   - [生成器](http://es6.ruanyifeng.com/#docs/generator)  
-  Generator是一个状态机。调用Generator函数后，该函数并不自信，返回的也不是函数运行结果，而是一个指向内部状态的指针对象，也就是迭代器对象
+  Generator是一个状态机。调用Generator函数后，该函数并不执行，返回的也不是函数运行结果，而是一个指向内部状态的指针对象，也就是迭代器对象。  
+  使用Generator实现斐波拉契数列   
+
+  ````javascript
+  function* fibonacci() {
+    var [pre, cur] = [0 ,1];
+    for(;;) {
+      [pre, cur] = [cur, pre + cur];
+      yield cur
+    }
+  }
+
+  for (let n of fibonacci()) {
+    if (n > 10) break;
+    console.info(n)
+  }
+  ````
 2. es7的装饰器、async/await  
 ## 各个模块化的了解
 
