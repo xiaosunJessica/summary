@@ -69,7 +69,8 @@
   margin: auto | 水平居中有效 | 无效，可用text-align解决  
 
   6. [用户访问页面到最终渲染的整个过程？](https://juejin.im/entry/59e1d31f51882578c3411c77)  
-    用户输入url,浏览器向服务器发送请求，获取html,然后进入HTML渲染机制。首先，根据HTML生成DOM树；其次，根据css和js重排页面  
+    用户输入url,浏览器向服务器发送请求，获取html,然后进入HTML渲染机制。首先，根据HTML生成DOM树；其次，根据css和js重排页面 
+    https://segmentfault.com/a/1190000009317496 
   7. 你对页面进行性能优化的思路和思想是什么？  
   答： 减少http请求; 减少DOM操作，避免不必要的重绘和重排;压缩文件体积；采用CDN；  
 
