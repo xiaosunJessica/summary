@@ -362,10 +362,13 @@
           return targetObj
         }
 
-        //利用JSON序列化实现的深拷贝
+        <!-- 利用JSON序列化实现的深拷贝 -->
         function deepCopy(source) {
           return JSON.parse(JSON.stringify(source))
         }
+
+        <!-- es6 -->
+        object.assign(target, ...sources)
       ````
   8. [如何实现数组去重？](https://github.com/mqyqingfeng/Blog/issues/27)  
     答：
@@ -458,7 +461,8 @@
   10. prototype和__proto__的关系是什么？    
     答：prototype只有构造函数才有该属性，后天赋于的。  
     proto/[[prototype]]是任何对象都有的，是私有的，天生自带的; 
-    __proto__是js的非标准但浏览器支持的属性。链关系的查找通过__proto__方式，如：obj.__proto__.__proto__  
+    __proto__是js的非标准但浏览器支持的属性。链关系的查找通过__proto__方式，如：obj.__proto__.__proto__    
+    每个对象都有[__proto__](http://es6.ruanyifeng.com/#docs/class-extends)属性，指向对应的构造函数的prototype属性。
 
       <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/prototype.png" alt="GitHub" title="prototype" width="400" height="100" />
   11. JS 如何实现继承？  
