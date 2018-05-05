@@ -439,10 +439,13 @@
           return targetObj
         }
 
-        //利用JSON序列化实现的深拷贝
+        <!-- 利用JSON序列化实现的深拷贝 -->
         function deepCopy(source) {
           return JSON.parse(JSON.stringify(source))
         }
+
+        <!-- es6 -->
+        object.assign(target, ...sources)
       ````
   8. [如何实现数组去重？](https://github.com/mqyqingfeng/Blog/issues/27)  
     答：
@@ -535,7 +538,8 @@
   10. prototype和__proto__的关系是什么？    
     答：prototype只有构造函数才有该属性，后天赋于的。  
     proto/[[prototype]]是任何对象都有的，是私有的，天生自带的; 
-    __proto__是js的非标准但浏览器支持的属性。链关系的查找通过__proto__方式，如：obj.__proto__.__proto__  
+    __proto__是js的非标准但浏览器支持的属性。链关系的查找通过__proto__方式，如：obj.__proto__.__proto__    
+    每个对象都有[__proto__](http://es6.ruanyifeng.com/#docs/class-extends)属性，指向对应的构造函数的prototype属性。
 
       <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/prototype.png" alt="GitHub" title="prototype" width="400" height="100" />
   11. JS 如何实现继承？  
@@ -782,7 +786,8 @@
   ````
   考察的点： new对象时，构造函数初始化是否传值；原型链查找值，先从自身找起。  
   因为首先查找自身属性是否含有a,有就取值自己的（B含有，且为undefined）,否则，通过原型链查找原型链上的。  
-25. [数组](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)和[字符串](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)操作方法？  
+25. [数组](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)和[字符串](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)操作方法？    
+
 26. 伪数组定义以及如何转数组？  
 答：
   **定义** 
@@ -803,6 +808,7 @@
   ````javascript
   var arr = [1, [[2, 3], 4], [5, 6]];
 
+  // 迭代器方式
   var flat = function* (a) {
     var length = a.length;
     for (var i = 0; i < length; i++) {
@@ -818,9 +824,42 @@
   for (var f of flat(arr)) {
     console.log(f);
   }
+
+  // 递归方式
+  var commonArr = []
+  var dimensionReduction = function (arr) {
+    if (!arr.length) return
+    arr.map(a => {
+      if (Array.isArray(a)) {
+        commonArr.concat(dimensionReduction(a))
+      } else {
+        commonArr.push(a)
+      }
+    })
+    return commonArr
+  }
+
+  // concat方式
+  var commonArr = []
+  var dimensionReduction = function(arr) {
+    for (let i = 0; i < arr.length ; i++) {
+      if (Array.isArray(a)) {
+        commonArr.concat(dimensionReduction(a))
+      } else {
+        commonArr.push(a)
+      }
+    }
+    return commonArr
+  }
   ````  
-  29. 什么情况下使用递归？
-  30. 
+  29. 什么情况下使用递归？   
+    -  调用规模有所缩减（通常减半） 
+    - 相邻之间有紧密联系，前一次为后一次做准备 
+    - 有终止结束的条件
+  30. 同一页面不同窗口，当一个页面数据变更时，如果通知另一窗口页面修改？ 
+      - [storage](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API)  
+      - 走后端接口
+  31. 
   ````javascript
   obj = {
       name: 'a',
