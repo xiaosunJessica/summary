@@ -251,7 +251,9 @@
     b. 通过position方式，例如：左侧高度固定，父元素position: relatvie; 右侧position: absolute; top: 0; bottom;  
       <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB1.png" alt="GitHub" title="border-box" width="300" height="300" />  
     c. 父元素display: table; 两个子元素display: table-cell.  
-      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB3.png" alt="GitHub" title="border-box" width="300" height="300" /> 
+      <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB3.png" alt="GitHub" title="border-box" width="300" height="300" />  
+    d. 父元素使用display: grid; grid-template-colums: 1fr 200px;分为两列，子元素通脱grid-colum: 1/2占左边，另个占右边。  
+     <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/AB4.png" alt="GitHub" title="border-box" width="300" height="300" /> 
 
   13. position的理解  
 
@@ -260,7 +262,82 @@
       static | 正常布局，top、bottom、left、right、z-index不起作用 
       relatvie | 会留空白，放在正常位置上  
       absolute | 脱离文档，不留空白，相对于非static的祖先元素定位 
-      fixed | 脱离文档，不留空白，相对于屏幕视口的位置定位  
+      fixed | 脱离文档，不留空白，相对于屏幕视口的位置定位   
+  
+  14. 右边宽度固定，左侧自适应  
+    - flex 
+    ````html
+    <style>
+      body{
+          display: flex;
+      }
+      .left{
+          background-color: rebeccapurple;
+          height: 200px;
+          flex: 1;
+      }
+      .right{
+          background-color: red;
+          height: 200px;
+          width: 100px;
+      }
+      </style>
+      <body>
+          <div class="left"></div>
+          <div class="right"></div>
+      </body>
+    ````  
+    - float 
+
+    ````html
+      div {
+          height: 200px;
+      }
+      .left {
+          float: right;
+          width: 200px;
+          background-color: rebeccapurple;
+      }
+      .right {
+          margin-right: 200px;
+          background-color: red;
+      }
+    ````  
+
+     - position 
+    
+    ````html
+      body {
+          position: relatvie;
+      }
+      .left {
+          position: absolute;
+          right: 0;
+          width: 200px;
+          background-color: rebeccapurple;
+      }
+      .right {
+          margin-right: 200px;
+          background-color: red;
+      }
+    ````  
+    - grid  
+    ````html
+      body {
+        display: grid;
+        grid-template-columns: 1fr 200px;  // /第一列1fr自适应，第二列200固定
+      }
+      .left {
+        grid-column: 1/2;
+        background: red;
+      }
+    ````
+  15. [px、em、rem](http://www.runoob.com/w3cnote/px-em-rem-different.html)  
+  答：    
+    px是相对于显示器屏幕分辨率而言的。  
+    em是相对于当前对象的文本的字体尺寸，如果当前对行内文本的字体尺寸未被设置，则依次向上查找直到相对于浏览器的默认字体  
+    rem是相对于html根元素（比较推荐）  
+    最后浏览器默认字体是16px,要设置一对一的对应关系，需要设置font-size：62.5%
 
 ## JS
   1. JS 有哪些数据类型？  
@@ -743,6 +820,19 @@
   }
   ````  
   29. 什么情况下使用递归？
+  30. 
+  ````javascript
+  obj = {
+      name: 'a',
+      getName : function () {
+          console.log(this.name);
+      }
+  }
+  var fn = obj.getName
+  obj.getName()
+  var fn2 = obj.getName()
+  fn()
+  ````
 
 ## HTTP
   1. HTTP 状态码知道哪些？  
@@ -875,7 +965,9 @@
     console.info(n)
   }
   ````
-2. es7的装饰器、async/await  
+2. es7的装饰器、async/await 
+3. var可以重复声明，而let不可以重复声明？  
+答： var存在变量提升的问题，再次声明的时候，会忽略掉；let不存在变量提升，会导致暂时性死区的问题，必须先声明才使用。
 ## 各个模块化的了解
 
 ## git
