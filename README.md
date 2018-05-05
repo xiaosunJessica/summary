@@ -338,7 +338,7 @@
     em是相对于当前对象的文本的字体尺寸，如果当前对行内文本的字体尺寸未被设置，则依次向上查找直到相对于浏览器的默认字体  
     rem是相对于html根元素（比较推荐）  
     最后浏览器默认字体是16px,要设置一对一的对应关系，需要设置font-size：62.5%
-
+ 16. 重排和重绘， 什么情况下会触发？
 ## JS
   1. JS 有哪些数据类型？  
     答： js基本数据类型：String、Number、Boolean、Null、undefined。混合数据类型Object(Array)
@@ -922,7 +922,8 @@
   11. 浏览器的hash和history两种路由机制？
    hash是带#号的，浏览器发送url请求时，#后面的不会发送给服务端。#用于浏览器滚动到#后面值的位置。
    histroy更美观，每次输入都会发送请求，而且未找到资源会发出404错误。
-  12. token
+  12. token  
+  13. 判断两个对象相等(JSON.stringify)
 
 ## WEBPACK
   1. [转译出的文件过大怎么办？](https://www.jianshu.com/p/367dc422393f)   
@@ -955,18 +956,6 @@
   4. loader与plugin区别？  
     答： loader是一个转换器，作用于文件，主要用于将一个文件转换成另一文件类型，例如*.less使用less-loader转换为*.css。  
     plugin是一个扩展器，作用于webpack。
-
-## React
-  1. 你对 react 有什么理解？基于 react 的开发模式比起传统 jqurey 开发模式的最大优势(可以有几个)是什么？
-  答： 理解： 通过Virtual DOM和Diff算法隔离DOM操作；采用单项数据流，可跟踪；组件化，JSX自定义标签，便于抽象化。
-  优点：react无需直接操作DOM，事件通过改变state间接操作DOM
-  2. react在setState后发生了什么（直接说了setState源码）  
-  当this.setState调用后，新的State没有立即生效，而是通过ReactUpdate.batchedUpdate存入临时的队列中。当一个transaction完成后，才通过ReactUpdate.flushBatchedUpdates将所有临时state merge并计算新的props和state
-  [思维发散问题](https://juejin.im/post/59a699fd6fb9a0247d4f5970
-  )  
-  3. flux解释
-  4. 对react有什么了解（直接说了react中虚拟dom内部表示，mount过程源码和同步过程源码）
-  5. combineReduces
 
 ## es6和es7的理解
 [es6](http://www.cnblogs.com/changyangzhe/articles/5702241.html)
@@ -1006,8 +995,11 @@
   ````
 2. es7的装饰器、async/await 
 3. var可以重复声明，而let不可以重复声明？  
-答： var存在变量提升的问题，再次声明的时候，会忽略掉；let不存在变量提升，会导致暂时性死区的问题，必须先声明才使用。
-## 各个模块化的了解
+答： var存在变量提升的问题，再次声明的时候，会忽略掉；let不存在变量提升，会导致暂时性死区的问题，必须先声明才使用。  
+4. set和Map数据结构    
+5. WeekMap和Map的区别  
+## 各个模块化的了解  
+1. commonJS的require/exports和es6中的import/export区别
 
 ## git
   [rebase和merge区别](https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E5%8F%98%E5%9F%BA)  
