@@ -8,14 +8,66 @@
   )  
   3. flux解释
   4. react生命周期
-  5. combineReduces
-  6. 不适用redux,组件之间如何通信？  
-  7. 两个组件之间交互方式？ 
+  5. combineReducers, applyMiddleware 
+  ````javascript
+  const combineReducers = reducers => {
+    return (state ={}, action) => {
+      return Object.keys(reducers).reduce(
+        (nextState, key) => {
+          nextState[key] = reducers[key](state[key], action)
+          return nextState
+        }, 
+        {}
+      )
+    }
+  }
+
+  applyMiddleware = (...middlewares) => {
+    return createStore => (reducer, preloadedState, enhancer) => {
+      let store = createStore(reducer, preloadedState, enhancer);
+      let dispatch = store.dispatch;
+      let chain = [];
+
+      let middlewareAPI = {
+        getState: store.getState,
+        dispatch: action => dispatch(action)
+      }
+
+      chain = middlewares.map(middleware => middleware(middlewateAPI));
+      dispatch = compose(...chain)(store.dispatch);
+      
+      return {...store, dispatch}
+    }
+  }
+  ````
+  7. [两个组件之间交互方式？](http://www.alloyteam.com/2016/01/some-methods-of-reactjs-communication-between-components/)  
+    - 父子组件间通信方式     
+      父组件通过props向子组件传递需要的信息；  
+      子组件向父组件通信方式： 回调函数，自定义事件机制；
+    - 兄弟组件间的通信方式  
+      将数据挂载在父组件中，由两组间共享  
+    - 层级较深的组件通信  
+      a. 使用第三方库redux/mobx等  
+      b. 全局事件,采用发布/订阅模式，在componentDidMount来绑定事件，在componentWillUnMount时候卸载事件  
+      c. 使用context(上下文)可以让子组件直接访问祖先的数据或函数，无需从祖先组件一层层传递，childContextTypes是必须的  
+    
+    总结： 简单的组件通信采用props和callback方法，但项目规模变大，层级变深，这些方法不适用，全局事件可以让组件直接沟通，但是数据流动变得很乱，使用redux可以让整个项目的数据变得比较清晰。  
   8. props和State区别  
+    答： props是一个从外部传进组件的参数，用于父组件向子组件传递数据，不可修改；
+    state用于组件内部状态使用，可修改   
   9. 数据流过程  
   <img src="https://github.com/xiaosunJessica/interview/blob/master/images/redux-flow.jpeg" alt="图1" title="图1" width="300" height="300" /> 
   
-  10. reducer是什么？
+  10. redux, react-redux是什么？  
+    redux基本概念： 
+      web应用是一个状态机，视图与状态一一对应 ；  
+      所有状态，保存在一个对象里，即为store;  
+      store是通过createStore这个函数创建的；  
+      store.getState获取整个State, store.dispatch是view发出的action;  
+      store收到Action以后，必须给出新的State,计算新的state的是reducer,它是一个纯函数；
+    react-redux: 
+      connect方法，用于从UI组件生成容器组件；  
+      Provider组件，可以让容器拿到State  
   11. 对比redux和mobx   
 
   类别 | redux | mobx  
