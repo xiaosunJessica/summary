@@ -403,6 +403,9 @@
       }
       ````
 
+      ajax优点： 无刷新更新数据  
+      缺点： 破坏浏览器的back和history功能  
+
   4. 闭包是什么?函数表达式与函数声明的区别？什么情况下使用闭包?  
     答： 闭包是在函数外依然能访问函数里的内容。  
     函数声明包括函数名和函数体function func() {},函数表达式是将函数定义为表达式语句的一部分 var func = function() {}  
@@ -925,39 +928,7 @@
   12. token  
   13. 判断两个对象相等(JSON.stringify)
 
-## WEBPACK
-  1. [转译出的文件过大怎么办？](https://www.jianshu.com/p/367dc422393f)   
-    答：  
-     a: 代码压缩：UglifyJsPlugin,使用这个会使编译速度变慢，一般在生成环境启用。  
-        b: 代码分割：
-        ````javascript
-        output: {
-            path: __dirname + 'xx',
-            publicPath: xxx,
-            filename: 'bundle.js'
-        }
-        ````
-        c: css单独打包
-        ````javascript
-        // 引入 css 单独打包插件
-      var ExtractTextPlugin = require('extract-text-webpack-plugin');
-      // 设置生成css 的路径和文件名，会自动将对应entry入口js文件中引入的CSS抽出成单独的文件
-      var packCSS = new ExtractTextPlugin('./css/[name].min.css');
-
-        ````
-        d: 去除不必要的插件
-        e: 提取第三方库
-  2. [转译速度慢什么办？](http://www.cnblogs.com/imwtr/p/7801973.html)      
-    答： a: 使用监听模式或热更新替换（--watch和hotModuleReplacementPlugin）  
-    b: babel-loader开启缓存  
-    c: 提取公共代码， 使用CommonsChunkPlugin提取公共模块，可减少文件体积，有助于浏览器的文件缓存
-    d: 优化搜索路径，exclude的配置避免多余文件的查找
-  3. 写过 webpack loader 吗？
-  4. loader与plugin区别？  
-    答： loader是一个转换器，作用于文件，主要用于将一个文件转换成另一文件类型，例如*.less使用less-loader转换为*.css。  
-    plugin是一个扩展器，作用于webpack。
-
-## es6和es7的理解
+ ## es6和es7的理解
 [es6](http://www.cnblogs.com/changyangzhe/articles/5702241.html)
 1. 迭代器（Iterator）与生成器（generator）  
   - [迭代器](http://es6.ruanyifeng.com/#docs/iterator)  

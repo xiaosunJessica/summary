@@ -66,7 +66,7 @@
       store.getState获取整个State, store.dispatch是view发出的action;  
       store收到Action以后，必须给出新的State,计算新的state的是reducer,它是一个纯函数；
     react-redux: 
-      connect方法，用于从UI组件生成容器组件；  
+      connect方法是一个返回高阶组件的高阶函数，用于从UI组件生成容器组件；  
       Provider组件，可以让容器拿到State  
   11. 对比redux和mobx   
 
