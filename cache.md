@@ -1,9 +1,10 @@
-# 缓存
+# HTTP缓存
   浏览器与服务器之间的通信方式是应答模式。    
   最初，进入浏览器，首次发起请求，此时，浏览器肯定是不会有缓存的。因此，其通信过程如下图所示
 
    <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/storage/storage1.png" alt="图1" title="图1" width="300" height="300" />
    在上图可以看出：
+
    - 浏览器每次发起请求，都会先在浏览器缓存中查找请求的结果及缓存标识  
    - 浏览器每次拿到换回的请求结果，都会将结果和标识存入浏览器缓存中。
 
@@ -51,8 +52,24 @@
   Etag是服务器响应请求时，返回当前资源文件的一个唯一标识。
   If-None-Match是客户端再次发起请求时，携带上次请求返回的唯一标识ETag值，通过该字段告诉服务器该资源上次请求返回的唯一标识值。服务器收到该请求后，发现请求头中的If-None-Match，则会根据If-None-Match的字段值与该资源在服务器的Etag做对比，如果一致，则代表资源无更新，返回状态码304；不一致则重新返回资源文件，返回状态码200.
   
+  ### 对比强缓存和协商缓存
+
+ 对比类型 | 强缓存 | 协商缓存
+---- | --- | ---
+http状态码 | 200 | 304
+缓存位置 |  本地浏览器 | 本地浏览器
+谁来决定 | 本地浏览器 | 服务器
+是否有效 | F5刷新无效，ctrl + F5刷新无效 | F5刷新有效， Ctrl+F5刷新无效
+
   ## 总结  
   强制缓存优于协商缓存，强制缓存是从浏览器缓存中获取的，协商缓存是带条件的，需要向服务器发起请求。
+	
+  ### 优化策略-消灭304
+   - 协商缓存本身也有http请求的损耗，尽可能将静态文件存储较长时间，多利用强缓存而不是协商缓存，但同时存在一个问题，当文件更新后，不能及时更新内容，可采取hash方式对文件命名
 
-  ## 参考链接
+
+
+  
+## 参考链接
   1. http://mp.weixin.qq.com/s?srcid=04270LewQDCrOr1hW9vh5gHL&scene=23&mid=2651228395&sn=dcf7e3bd518f1e189ce17eaed94c27bb&idx=1&__biz=MjM5MTA1MjAxMQ%3D%3D&chksm=bd49516f8a3ed879221bf28bf68ac00c4733a6048c54ea90e75a9e2315a262c2d66fb29a4a34&mpshare=1#rd&appinstall=0
+	2. https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651554722&idx=2&sn=1fd2eef32a303056beecbe8b0da37512&chksm=80255463b752dd75ac981952e0bd5211939e52244776b55a044bc2eeb9ae2d6b1d9c3f2e16c6&scene=38#wechat_redirect
