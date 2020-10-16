@@ -762,6 +762,11 @@
   请问a, b有什么异同？  
   答： a是数组; b是HTMLCollection,是一种伪数组   
 
+  附加： document.querySelectorAll("p")是NodeList对象，而不是HTMLCollection对象
+
+  <img src="./images/htmlCollection.png" alt="GitHub" title="content-box" width="200" height="200" />
+  <img src="./images/htmlCollectionItem.png" alt="GitHub" title="content-box" width="200" height="200" />
+
   23. 实现空格分隔字符串
   如： 'Hello'.specify() = 'H e l l o'  
   
@@ -806,6 +811,9 @@
 
   **转真数组** 
   - Array.prototype.slice.call(arr)  
+  - Array.from(arr)
+  - [...arr]
+  - Array.prototype.concat.apply([], arr)
 27. [原型的理解](https://github.com/xiaosunJessica/interview/blob/master/prototype.md) 
 28. [数组降维](http://es6.ruanyifeng.com/#docs/generator)  
   ````javascript

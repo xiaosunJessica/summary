@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2018-08-10 15:13:32
- * @LastEditTime: 2020-10-16 15:19:12
+ * @LastEditTime: 2020-10-16 15:34:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /summary/array.md
@@ -49,11 +49,5 @@ findIndex方法返回数组中提供测试函数的第一个元素的索引， �
 ## arrayToString
 join将数组的所有元素连接成一个字符串并返回该字符串    
 toString返回一个字符串  
-
-类数组转化数组的方式
-1. Array.from(array)
-2. [...array]
-3. Array.prototype.slice.call(array)
-4. Array.prototype.concat.apply([], array)
 
 
