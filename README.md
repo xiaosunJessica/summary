@@ -842,6 +842,10 @@
     return commonArr
   }
 
+	var dimensionReduction = (arr) => arr.reduce((a, b) => a.concat(Array.isArray(b) ? dimensionReduction(b) : b), [])
+
+	var dimensionReduction = (arr) => Array.isArray(a) ? [].concat(...a.map(flatten)): a
+
   // concat方式
   var commonArr = []
   var dimensionReduction = function(arr) {
@@ -854,6 +858,13 @@
     }
     return commonArr
   }
+
+
+
+	// other
+	arr.toString().split(',')
+	eval('['+arr+']')
+	JSON.parse(`[${JSON.stringify(arr).replace(/\[|]/g, '')}]`)
   ````  
   29. 什么情况下使用递归？   
     -  调用规模有所缩减（通常减半） 
