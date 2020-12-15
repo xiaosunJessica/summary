@@ -819,6 +819,9 @@
   ````javascript
   var arr = [1, [[2, 3], 4], [5, 6]];
 
+  // es 2019
+  arr.flat(Infinity)
+
   // 迭代器方式
   var flat = function* (a) {
     var length = a.length;
@@ -850,9 +853,13 @@
     return commonArr
   }
 
-	var dimensionReduction = (arr) => arr.reduce((a, b) => a.concat(Array.isArray(b) ? dimensionReduction(b) : b), [])
-
-	var dimensionReduction = (arr) => Array.isArray(a) ? [].concat(...a.map(flatten)): a
+  // reduce
+	const flatten = arr => {
+    return arr.reduce((pre, cur) => {
+      return pre.concat(Array.isArray(cur) ? flatten(cur) : cur);
+    }, [])
+  }
+  flatten(arr);
 
   // concat方式
   var commonArr = []
@@ -867,12 +874,15 @@
     return commonArr
   }
 
-
+  // 正则的方式
+  JSON.stringify(arr).replace(/\[|\]/g, '').split(',')
+  JSON.parse(`[${JSON.stringify(arr).replace(/\[|\]/g, '')}]`)
 
 	// other
 	arr.toString().split(',')
 	eval('['+arr+']')
-	JSON.parse(`[${JSON.stringify(arr).replace(/\[|]/g, '')}]`)
+
+
   ````  
   29. 什么情况下使用递归？   
     -  调用规模有所缩减（通常减半） 
