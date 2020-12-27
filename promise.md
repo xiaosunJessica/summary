@@ -39,3 +39,7 @@
     })
   }
   ```
+
+  # 参考链接
+  1. [手写promise](https://zhuanlan.zhihu.com/p/183801144)
+  2. [Promise](https://github.com/then/promise)
