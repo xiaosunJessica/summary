@@ -811,6 +811,9 @@
 
   **转真数组** 
   - Array.prototype.slice.call(arr)  
+  - Array.from(arr)
+  - [...arr]
+  - Array.prototype.concat.apply([], arr)
 27. [原型的理解](https://github.com/xiaosunJessica/interview/blob/master/prototype.md) 
 28. [数组降维](http://es6.ruanyifeng.com/#docs/generator)  
   ````javascript
@@ -847,6 +850,10 @@
     return commonArr
   }
 
+	var dimensionReduction = (arr) => arr.reduce((a, b) => a.concat(Array.isArray(b) ? dimensionReduction(b) : b), [])
+
+	var dimensionReduction = (arr) => Array.isArray(a) ? [].concat(...a.map(flatten)): a
+
   // concat方式
   var commonArr = []
   var dimensionReduction = function(arr) {
@@ -859,6 +866,13 @@
     }
     return commonArr
   }
+
+
+
+	// other
+	arr.toString().split(',')
+	eval('['+arr+']')
+	JSON.parse(`[${JSON.stringify(arr).replace(/\[|]/g, '')}]`)
   ````  
   29. 什么情况下使用递归？   
     -  调用规模有所缩减（通常减半） 

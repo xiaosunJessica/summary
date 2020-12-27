@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2018-08-10 15:13:32
+ * @LastEditTime: 2020-10-16 15:34:54
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /summary/array.md
+-->
 # 数组
 
 ## 判断数组

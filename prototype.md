@@ -19,7 +19,7 @@
 
  <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/prototype/proto2.png" alt="图2" title="图2" width="300" height="300" />  
 
- 上述的Person是一个函数，它属于函数的实例化对象，而函数也是对象。同时，需要注意的是: *所有函数的原型都是Function。prototype*,这其中包括Function的构造函数和Object构造函数（下图标红部分）。因此，将函数的原型关系加入进去，如下如所示：  
+ 上述的Person是一个函数，它属于函数的实例化对象，而函数也是对象。同时，需要注意的是: *所有函数的原型都是Function.prototype*，这其中包括Function的构造函数和Object构造函数（下图标红部分）。因此，将函数的原型关系加入进去，如下如所示：  
 
   <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/prototype/proto3.png" alt="图3" title="图3" width="300" height="300" />  
 
