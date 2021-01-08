@@ -36,16 +36,35 @@
  *  
  */
 
-function debounce(func, wait) {
+function debounce(func, wait, immediate) {
+  // 异常处理
+  if (typeof func !== 'function') {
+    throw new TypeError('func is not a function')
+  }
   // 通过闭包缓存定时器id
   let timerId = null;
   function debounced(...args) {
     const context = this;
+
+    if (immediate) result = func.apply(context, args);
+    
     // 已存在定时器，清空上一次的定时器
     if (timerId) clearTimeout(timerId);
 
     // 设定新的定时器，定时器结束后执行传入的函数
     timerId = setTimeout(() => {
+      /** 
+       * 这里需要绑定上下文的原因
+       * var o = {
+              c: 1,
+              a: function() {
+                  console.log(this.c);
+              }
+          }
+        绑定this方式1
+        var b = debounce(o.a.bind(this), 100)
+        从这里看需要输出的是1， 如果下面不绑定context，这里是this就对应window, 输出的就是window.c = undefine
+       * */
       func.apply(context, args)
     }, wait)
   }
