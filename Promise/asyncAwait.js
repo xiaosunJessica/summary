@@ -42,3 +42,58 @@ function asyncToGenerator (generatorFunc) {
     })
   }
 }
+
+/**
+ * 第一步： co的函数，
+ * 了解到传入的是generator函数，
+ * 返回的是Promise，
+ * 且支持generator函数的自执行
+ */
+// function co(gen) {
+//   const g = gen();
+//   return new Promise((resolve, reject) => {
+//     function next() {
+
+//     }
+
+//     next();
+//   })
+// }
+
+/** 
+ * 第二步： 这里的step其实是thunk函数，是函数的传递
+ */
+function co(gen) {
+  const ctx = this;
+  let args = Array.prototype.slice.call(arguments, 1)
+  return new Promise((resolve, reject) => {
+    let g = gen;
+    // 如果gen是函数，执行
+    if (typeof gen === 'function') g = gen.apply(ctx, args);
+    // 如果next是函数, 说明是迭代器; 否则直接返回
+    if (!g || typeof g.next !== 'function') return resolve(g)
+    // 
+    function step(nextF) {
+      let nextResult;
+      try {
+        nextResult = nextF();
+      } catch (err) {
+        return reject(err)
+      }
+      // 如果done为true, 迭代器执行完成
+      if (nextResult.done) {
+        return resolve(nextResult.value)
+      }
+      // 继续执行迭代器
+      Promise.resolve(nextResult.value).then(function(value){
+        step(function(){return g.next(value)})
+      }, function(err){
+        step(function(){return g.throw(err)})
+      })
+    }
+
+    step(function() {
+      return g.next();
+    });
+  })
+}
