@@ -20,7 +20,7 @@
     
   - 当强缓存有效，即浏览器缓存中的缓存结果和标识都存在且有效。此时，直接从浏览器缓存获取，不需要与服务器交互。如下图所示： 
   
-     <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/storage/storage3.png" alt="图3" title="图3" width="300" height="300" />  
+     <img src="https://raw.githubusercontent.com/xiaosunJessica/interview/master/images/storage/storage4.png" alt="图3" title="图3" width="300" height="300" />  
   
   ## 强缓存
   当浏览器向服务器发起请求时，服务器会将缓存规则放入HTTP响应报文的HTTP头中和相应结果一起返回给浏览器，强制缓存就是向浏览器缓存查找请求结果，并根据该结果的缓存规则来决定是否使用该缓存结果的过程。控制强缓存的字段是Expires和Cache-control,其中Cache-Control的优先级高于Expires。

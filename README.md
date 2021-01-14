@@ -70,6 +70,17 @@
 
   6. [用户访问页面到最终渲染的整个过程？](https://juejin.im/entry/59e1d31f51882578c3411c77)  
     用户输入url,浏览器向服务器发送请求，获取html,然后进入HTML渲染机制。首先，根据HTML生成DOM树；其次，根据css和js重排页面 
+    url -> 
+    DNS获取ip (ip寻址，TCP( 可靠,慢， 三次握手，滑动窗口， HTTP, FNP, SSH，分片，慢启动)； UDP( 不可靠, 快，DNS))-> 
+    TCP -> 
+    HTTP解析（method， body, 报文，spa, 同构）浏览器html/css执行js ->
+    浏览器渲染
+
+    cdn 快， 到处有服务器，距离近比较快
+
+    上线：线上模板还是先上cdn问题
+
+    webpack 静态资源contentHash
     https://segmentfault.com/a/1190000009317496 
   7. 你对页面进行性能优化的思路和思想是什么？  
   答： 减少http请求; 减少DOM操作，避免不必要的重绘和重排;压缩文件体积；采用CDN；  
@@ -338,6 +349,7 @@
     em是相对于当前对象的文本的字体尺寸，如果当前对行内文本的字体尺寸未被设置，则依次向上查找直到相对于浏览器的默认字体  
     rem是相对于html根元素（比较推荐）  
     最后浏览器默认字体是16px,要设置一对一的对应关系，需要设置font-size：62.5%
+    <!-- http://www.alloyteam.com/2016/03/mobile-web-adaptation-tool-rem/ -->
  16. 重排和重绘， 什么情况下会触发？
 ## JS
   1. JS 有哪些数据类型？  
