@@ -39,7 +39,6 @@ Function.prototype.myCall = function(context) {
    if (typeof this !== 'function') {
      throw new Error('this 必须是函数')
    }
-   console.log(arguments, '------arguments------')
    // 计算参数
    let result = null;
    // 判断context是否传入，没传入默认是window

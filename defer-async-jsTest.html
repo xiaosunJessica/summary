@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <p>...content before script...</p>
+
+  <script src="https://javascript.info/article/script-async-defer/long.js?speed=1"></script>
+
+  <This isn't visible until the script loads >
+  <p>...content after script...</p> -->
+
+    <!-- ...all content is above the script... -->
+  
+    <!-- <script src="https://javascript.info/article/script-async-defer/long.js?speed=1"></script> -->
+
+    <p>...content before scripts...</p>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => alert("DOM ready!"));
+    </script>
+    
+    <script async src="https://javascript.info/article/script-async-defer/long.js"></script>
+    <script async src="https://javascript.info/article/script-async-defer/small.js"></script>
+    
+    <p>...content after scripts...</p>
+</body>
+</html>
